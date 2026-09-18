@@ -1,5 +1,4 @@
 package main
-<<<<<<< HEAD
 
 import "fmt"
 
@@ -113,5 +112,4 @@ func main() {
 
 // pour le scan quand il attend un INT il faut mettre un string qui converti en INT pour eviter les erreurs de scan
 // au lieu de mettre plusieurs fois certains éléments, mettre des constantes pour les réutiliser partout, exemple pour les potions
-=======
->>>>>>> 0972df57170c58a740dbcf751e4fec7b1f64525b
+
