@@ -6,7 +6,7 @@ type Character struct {
 	Classe     string
 	PvMax      int
 	Pv         int
-	Inventaire map[string]int
+	Inventory map[string]int
 	Money int
 }
 
@@ -25,7 +25,7 @@ func (c *Character) initCharacter(name string, classe string) {
 		c.Pv = c.PvMax / 2
 	}
 
-	c.Inventaire = map[string]int{
+	c.Inventory = map[string]int{
 		PotionVie:    3,
 		"ordinateur": 1,
 	}

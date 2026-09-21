@@ -12,7 +12,7 @@ const (
 
 // takePot utilise une potion de vie sur le personnage.
 func (c *Character) takePot() {
-	potQuantity, potCheck := c.Inventaire[PotionVie]
+	potQuantity, potCheck := c.Inventory[PotionVie]
 
 	if !potCheck {
 		fmt.Println(Red + "Vous n'avez pas de potion dans votre inventaire." + Reset)
@@ -30,7 +30,7 @@ func (c *Character) takePot() {
 		c.Pv = c.PvMax
 	}
 
-	c.Inventaire[PotionVie]--
+	c.Inventory[PotionVie]--
 
 	fmt.Printf("%s✓ Potion utilisée !%s Vous avez maintenant %s%d/%d PV%s.\n",
 		Green, Reset, Bold, c.Pv, c.PvMax, Reset)
