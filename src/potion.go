@@ -38,14 +38,14 @@ func (c *Character) takePot() {
 
 
 func (c *Character) poisonPot() {
-	potQuantity, potCheck := c.Inventaire[PotionPoison]
+	potQuantity, potCheck := c.Inventory[PotionPoison]
 
 	if !potCheck || potQuantity <= 0 {
 		fmt.Println(Red + "Vous n'avez pas de potion de poison dans votre inventaire." + Reset)
 		return
 	}
 
-	c.Inventaire[PotionPoison]--
+	c.Inventory[PotionPoison]--
 
 	fmt.Println(Green + "☠ Vous avez bu une potion de poison..." + Reset)
 
