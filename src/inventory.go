@@ -7,16 +7,26 @@ func (c *Character) accessInventory() {
 	for true {
 		clearScreen()
 
-		fmt.Println("=== INVENTAIRE ===")
+		printBoxTitle("INVENTAIRE")
+
 		for itemName, itemQuantity := range c.Inventaire {
-			fmt.Printf("\t - %s: %d\n", itemName, itemQuantity)
+			printBoxLine(fmt.Sprintf("%s•%s %-22s : %s%d%s",
+				Cyan, Reset,
+				itemName,
+				Bold, itemQuantity, Reset,
+			))
 		}
 
-		fmt.Println()
-		fmt.Println("\t 1. Utiliser une potion")
-		fmt.Println("\t 0. Retour au menu principal")
+		printBoxSeparator()
 
-		fmt.Print("Choisissez une option: ")
+		printBoxLine(Yellow + "[1]" + Reset + "  Utiliser une potion")
+		printBoxLine(Yellow + "[0]" + Reset + "  Retour au menu principal")
+
+		printBoxSeparator()
+		printBoxLine(Cyan + "Choisissez une option..." + Reset)
+		printBoxBottom()
+
+		fmt.Print("\n  > ")
 
 		var chose int
 		fmt.Scan(&chose)
@@ -24,12 +34,23 @@ func (c *Character) accessInventory() {
 		switch chose {
 		case 0:
 			return
+
 		case 1:
+			clearScreen()
+
+			printBoxTitle("POTION DE VIE")
 			c.takePot()
+			printBoxBottom()
+
 			waitForEnter()
+
 		default:
-			fmt.Println()
-			fmt.Println("Option invalide. Veuillez réessayer.")
+			clearScreen()
+
+			printBoxTitle("ERREUR")
+			printBoxLine(Red + "Option invalide." + Reset)
+			printBoxBottom()
+
 			waitForEnter()
 		}
 	}
