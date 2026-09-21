@@ -21,6 +21,7 @@ func goblinPattern(goblin *Monster, player *Character, turn int) {
 
 	fmt.Printf("%s inflige %d dégâts à %s.\n", goblin.Name, damage, player.Name)
 	fmt.Printf("%s : PV %d/%d\n", player.Name, player.Pv, player.PvMax)
+	waitForEnter()
 }
 
 //-------------------// FIN TOUR DU GOBELIN //-------------------//
@@ -65,9 +66,11 @@ func characterTurn(player *Character, monster *Monster) {
 				monster.Pv = 0
 			}
 
-			fmt.Printf("%s utilise Attaque basique et inflige %d dégâts à %s.\n", player.Name, basicAttackDamage, monster.Name)
-			fmt.Printf("%s : PV %d/%d\n", monster.Name, monster.Pv, monster.PvMax)
-			return
+fmt.Printf("%s utilise Attaque basique et inflige %d dégâts à %s.\n", player.Name, basicAttackDamage, monster.Name)
+fmt.Printf("%s : PV %d/%d\n", monster.Name, monster.Pv, monster.PvMax)
+waitForEnter()
+
+return
 
 		case 2:
 			player.accessInventory()
@@ -96,13 +99,22 @@ func testCombat(player *Character) {
 
 		characterTurn(player, &goblin)
 
-		// Si le gobelin est mort, le combat est terminé.
-		if goblin.Pv <= 0 {
-			fmt.Println("\nLe gobelin est vaincu !")
-			waitForEnter()
-			return
-		}
+// Si le gobelin est mort, le combat est terminé.
+if goblin.Pv <= 0 {
+    clearScreen()
 
+    //-------------------// VICTOIRE //-------------------//
+    printGameTitle()
+    printBoxTitle("VICTOIRE")
+    printBoxLine(Green + Bold + "Le Gobelin d'entraînement est vaincu !" + Reset)
+    printBoxLine(fmt.Sprintf("%s a remporté le combat !", player.Name))
+    printBoxBottom()
+
+    waitForEnter()
+    return
+    //-------------------// FIN VICTOIRE //-------------------//
+}
+//-------------------// COMBAT DE TEST //-------------------//
 		// Tour du gobelin
 		goblinPattern(&goblin, player, turn)
 
@@ -117,3 +129,4 @@ func testCombat(player *Character) {
 	}
 }
 //-------------------// FIN COMBAT DE TEST //-------------------//
+
