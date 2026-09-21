@@ -19,7 +19,8 @@ func (c *Character) accessInventory() {
 
 		printBoxSeparator()
 
-		printBoxLine(Yellow + "[1]" + Reset + "  Utiliser une potion")
+		printBoxLine(Yellow + "[1]" + Reset + "  Utiliser une potion de vie")
+		printBoxLine(Yellow + "[2]" + Reset + "  Utiliser une potion de poison")
 		printBoxLine(Yellow + "[0]" + Reset + "  Retour au menu principal")
 
 		printBoxSeparator()
@@ -40,6 +41,15 @@ func (c *Character) accessInventory() {
 
 			printBoxTitle("POTION DE VIE")
 			c.takePot()
+			printBoxBottom()
+
+			waitForEnter()
+
+		case 2:
+			clearScreen()
+
+			printBoxTitle("POTION DE POISON")
+			c.poisonPot()
 			printBoxBottom()
 
 			waitForEnter()
