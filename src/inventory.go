@@ -58,18 +58,18 @@ func (c *Character) accessInventory() {
 
 	func(c*Character) AddInventory (ItemName string, ItemQuantity int){
 		var TotalItems int
-		for _, value := c.Inventory{
+		for _, value := range c.Inventory{
 			TotalItems += value
 		}
 		if (TotalItems + ItemQuantity) > StockageMax{
 			fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
 			return
 		}
-		check := c.Inventory(ItemName)
-		if (check){
-			c.Inventory(ItemName) += ItemQuantity
+		check := c.Inventory[ItemName]
+		if (check > 0){ 
+			c.Inventory[ItemName] += ItemQuantity
 		}else{
-			c.Inventory(ItemName)= ItemQuantity
+			c.Inventory[ItemName]= ItemQuantity
 		}
-		fmt.Println("+1" ItemName)	
+		fmt.Println("+1", ItemName)	
 	}
