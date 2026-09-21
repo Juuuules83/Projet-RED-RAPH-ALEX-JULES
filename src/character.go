@@ -7,12 +7,14 @@ type Character struct {
 	PvMax      int
 	Pv         int
 	Inventaire map[string]int
+	Money int
 }
 
 // initCharacter initialise les informations du personnage.
 func (c *Character) initCharacter(name string, classe string) {
 	c.Name = name
 	c.Classe = classe
+	c.Money = 100
 
 	switch c.Classe {
 	case "mentor":
