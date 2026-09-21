@@ -14,7 +14,7 @@ func displayInfo(c Character) {
 
 	printBoxLine(fmt.Sprintf("%sNom%s    : %s%s%s", Cyan, Reset, Bold, c.Name, Reset))
 	printBoxLine(fmt.Sprintf("%sClasse%s : %s%s%s", Cyan, Reset, Bold, c.Classe, Reset))
-	printBoxLine(fmt.Sprintf("%sPV%s     : %s%d/%d%s", Cyan, Reset, Green, c.Pv, c.PvMax, Reset))
+	printBoxLine(fmt.Sprintf("%sPV%s     : %s%d/%d%s", Cyan, Reset, Red, c.Pv, c.PvMax, Reset))
 	printBoxLine(fmt.Sprintf("%sArgent%s : %s%d%s", Cyan, Reset, Green, c.Money, Reset))
 
 	printBoxBottom()
