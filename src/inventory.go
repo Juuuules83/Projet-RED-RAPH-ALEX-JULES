@@ -9,7 +9,7 @@ func (c *Character) accessInventory() {
 
 		printBoxTitle("INVENTAIRE")
 
-		for itemName, itemQuantity := range c.Inventaire {
+		for itemName, itemQuantity := range c.Inventory {
 			printBoxLine(fmt.Sprintf("%s•%s %-22s : %s%d%s",
 				Cyan, Reset,
 				itemName,
@@ -61,12 +61,12 @@ func (c *Character) accessInventory() {
 		for _, value := c.Inventory{
 			TotalItems += value
 		}
-		If !(TotalItems + ItemQuantity)<= StockageMax{
+		if (TotalItems + ItemQuantity) > StockageMax{
 			fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
 			return
 		}
 		check := c.Inventory(ItemName)
-		If (check){
+		if (check){
 			c.Inventory(ItemName) += ItemQuantity
 		}else{
 			c.Inventory(ItemName)= ItemQuantity
