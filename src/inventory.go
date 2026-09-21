@@ -56,20 +56,22 @@ func (c *Character) accessInventory() {
 	}
 }
 
-func(c*Character) AddInventory (ItemName string, ItemQuantity int){
-	var TotalItems int
-	for _, value := c.Inventory{
-		TotalItems += value
-	}
-	If !(TotalItems + ItemQuantity)<= StockageMax{
-		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
+// AddInventory ajoute une quantité d'un objet à l'inventaire du personnage.
+func (c *Character) AddInventory(itemName string, itemQuantity int) {
+	if itemQuantity <= 0 {
 		return
 	}
-	check := c.Inventory(ItemName)
-	If (check){
-		c.Inventory(ItemName) += ItemQuantity
-	}else{
-		c.Inventory(ItemName)= ItemQuantity
+	var totalItems int
+	for _, quantity := range c.Inventaire {
+		totalItems += quantity
 	}
-	fmt.Println("+1" ItemName)	
+	if StockageMax > 0 && totalItems+itemQuantity > StockageMax {
+		fmt.Println("Vous n'avez plus assez d'espace dans votre inventaire.")
+		return
+	}
+	if c.Inventaire == nil {
+		c.Inventaire = make(map[string]int)
+	}
+	c.Inventaire[itemName] += itemQuantity
+	fmt.Printf("+%d %s\n", itemQuantity, itemName)
 }
