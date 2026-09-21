@@ -222,18 +222,18 @@ func (m navigationModel) renderMainMenu() string {
 	var builder strings.Builder
 
 	for _, line := range navigationLogoLines() {
-		builder.WriteString(line + "\n")
+		_, _ = builder.WriteString(line + "\n")
 	}
 
-	builder.WriteString("\n")
-	builder.WriteString(centerStyled(Bold+White+" - O F   G O P H E R - "+Reset, " - O F   G O P H E R - ", menuWidth))
-	builder.WriteString("\n")
-	builder.WriteString(renderNavigationHeading("MENU PRINCIPAL", Magenta))
-	builder.WriteString(renderNavigationOption("Informations du personnage", m.cursor == 0) + "\n")
-	builder.WriteString(renderNavigationOption("Acceder a l'inventaire", m.cursor == 1) + "\n")
-	builder.WriteString(renderNavigationOption("Combat de test", m.cursor == 2) + "\n")
-	builder.WriteString(renderNavigationOption("Quitter", m.cursor == 3))
-	builder.WriteString(renderNavigationFooter("↑ ↓ naviguer  •  Entree valider  •  Echap quitter"))
+	_, _ = builder.WriteString("\n")
+	_, _ = builder.WriteString(centerStyled(Bold+White+" - O F   G O P H E R - "+Reset, " - O F   G O P H E R - ", menuWidth))
+	_, _ = builder.WriteString("\n")
+	_, _ = builder.WriteString(renderNavigationHeading("MENU PRINCIPAL", Magenta))
+	_, _ = builder.WriteString(renderNavigationOption("Informations du personnage", m.cursor == 0) + "\n")
+	_, _ = builder.WriteString(renderNavigationOption("Acceder a l'inventaire", m.cursor == 1) + "\n")
+	_, _ = builder.WriteString(renderNavigationOption("Combat de test", m.cursor == 2) + "\n")
+	_, _ = builder.WriteString(renderNavigationOption("Quitter", m.cursor == 3))
+	_, _ = builder.WriteString(renderNavigationFooter("↑ ↓ naviguer  •  Entree valider  •  Echap quitter"))
 
 	return builder.String()
 }
@@ -329,14 +329,14 @@ func renderNavigationHeading(title string, color string) string {
 func renderNavigationScreen(title string, titleColor string, lines []string, footer string) string {
 	var builder strings.Builder
 
-	builder.WriteString(renderNavigationHeading(title, titleColor))
-	builder.WriteString("\n")
+	_, _ = builder.WriteString(renderNavigationHeading(title, titleColor))
+	_, _ = builder.WriteString("\n")
 
 	for _, line := range lines {
-		builder.WriteString(line + "\n")
+		_, _ = builder.WriteString(line + "\n")
 	}
 
-	builder.WriteString(renderNavigationFooter(footer))
+	_, _ = builder.WriteString(renderNavigationFooter(footer))
 	return builder.String()
 }
 
