@@ -92,7 +92,7 @@ func (m navigationModel) goBack() (tea.Model, tea.Cmd) {
 	switch m.screen {
 	case mainScreen:
 		return m, tea.Quit
-	case infoScreen, inventoryScreen, combatResultScreen:
+	case infoScreen, inventoryScreen, combatScreen, combatResultScreen:
 		m.screen = mainScreen
 	case combatInventoryScreen:
 		m.screen = combatScreen
