@@ -84,3 +84,36 @@ func characterTurn(player *Character, monster *Monster) {
 }
 
 //-------------------// FIN TOUR DU PERSONNAGE //-------------------//
+
+//-------------------// COMBAT DE TEST //-------------------//
+func testCombat(player *Character) {
+	goblin := initGoblin()
+	turn := 1
+
+	for player.Pv > 0 && goblin.Pv > 0 {
+
+		fmt.Printf("\n===== TOUR %d =====\n", turn)
+
+		characterTurn(player, &goblin)
+
+		// Si le gobelin est mort, le combat est terminé.
+		if goblin.Pv <= 0 {
+			fmt.Println("\nLe gobelin est vaincu !")
+			waitForEnter()
+			return
+		}
+
+		// Tour du gobelin
+		goblinPattern(&goblin, player, turn)
+
+		// Si le joueur est mort, le combat est terminé.
+		if player.Pv <= 0 {
+			fmt.Println("\nVous avez perdu !")
+			waitForEnter()
+			return
+		}
+
+		turn++
+	}
+}
+//-------------------// FIN COMBAT DE TEST //-------------------//

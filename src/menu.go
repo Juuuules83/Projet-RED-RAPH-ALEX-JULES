@@ -33,6 +33,7 @@ func mainMenu(player *Character) {
 
 		printBoxLine(Yellow + "[1]" + Reset + "  Informations du personnage")
 		printBoxLine(Yellow + "[2]" + Reset + "  Accéder à l'inventaire")
+		printBoxLine(Yellow + "[3]" + Reset + "  Combat de test")
 		printBoxLine(Yellow + "[0]" + Reset + "  Quitter")
 
 		printBoxSeparator()
@@ -57,6 +58,9 @@ func mainMenu(player *Character) {
 
 		case 2:
 			player.accessInventory()
+
+		case 3:
+    	testCombat(player)
 
 		default:
 			clearScreen()
