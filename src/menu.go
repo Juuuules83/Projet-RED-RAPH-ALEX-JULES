@@ -11,6 +11,7 @@ func displayInfo(c Character) {
 	fmt.Printf("\t Classe: %s\n", c.Classe)
 	fmt.Printf("\t PV: %d/%d\n", c.Pv, c.PvMax)
 	fmt.Printf("\t Pv max : %d\n", c.PvMax)
+	fmt.Printf("\t Money : %d\n", c.Money)
 
 	waitForEnter()
 }
