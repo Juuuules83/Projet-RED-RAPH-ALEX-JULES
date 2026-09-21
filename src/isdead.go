@@ -9,6 +9,7 @@ func isDead(c *Character) bool {
 
 		c.Pv = c.PvMax / 2
 		fmt.Printf("%s est ressuscité avec %d / %d PV\n", c.Name, c.Pv, c.PvMax)
+	
 		return true
 	}
 	return false
