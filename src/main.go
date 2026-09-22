@@ -3,8 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	var player Character
-	player.initCharacter("Cyril", "mentor")
+	player := characterCreation()
 
 	//-------------// BUBBLE TEA //----------------//
 	if err := startNavigation(&player); err != nil {

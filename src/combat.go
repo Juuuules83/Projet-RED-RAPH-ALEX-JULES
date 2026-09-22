@@ -39,7 +39,8 @@ func characterTurn(player *Character, monster *Monster) {
 		printBoxSeparator()
 
 		printBoxLine(Yellow + "[1]" + Reset + "  Attaquer")
-		printBoxLine(Yellow + "[2]" + Reset + "  Inventaire")
+		printBoxLine(Yellow + "[2]" + Reset + "  Potion de poison")
+		printBoxLine(Yellow + "[3]" + Reset + "  Inventaire")
 
 		printBoxSeparator()
 		printBoxLine(Cyan + "Choisissez votre action..." + Reset)
@@ -73,6 +74,12 @@ func characterTurn(player *Character, monster *Monster) {
 			return
 
 		case 2:
+			player.poisonPot(monster)
+			waitForEnter()
+
+			return
+
+		case 3:
 			player.accessInventory()
 			return
 
