@@ -41,8 +41,7 @@ func mainMenu(player *Character) {
 		printBoxBottom()
 
 		fmt.Print("\n  " + Bold + Cyan + ">" + Reset + " ")
-
-		var chose int
+		
 		fmt.Scan(&chose)
 
 		switch chose {

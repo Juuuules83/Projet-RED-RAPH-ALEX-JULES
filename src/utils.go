@@ -181,3 +181,7 @@ func typeWriter(str string, delay time.Duration) {
 }
 
 var StockageMax int
+
+
+
+var chose int
