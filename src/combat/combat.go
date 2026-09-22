@@ -6,35 +6,35 @@ import (
 
 const BasicAttackDamage = 5
 
-func PlayerAttack(character *player.Character, monster *Monster) int {
-	if monster == nil || monster.Pv <= 0 {
+func PlayerAttack(c *player.Character, m *Monster) int {
+	if m == nil || m.Pv <= 0 {
 		return 0
 	}
 
-	monster.Pv -= BasicAttackDamage
+	m.Pv -= BasicAttackDamage
 
-	if monster.Pv < 0 {
-		monster.Pv = 0
+	if m.Pv < 0 {
+		m.Pv = 0
 	}
 
 	return BasicAttackDamage
 }
 
-func MonsterAttack(character *player.Character, monster *Monster, turn int) int {
-	if character == nil || monster == nil || monster.Pv <= 0 || character.Pv <= 0 {
+func MonsterAttack(c *player.Character, m *Monster, t int) int {
+	if c == nil || m == nil || m.Pv <= 0 || c.Pv <= 0 {
 		return 0
 	}
 
-	damage := monster.Attack
+	damage := m.Attack
 
-	if turn%3 == 0 {
+	if t%3 == 0 {
 		damage *= 2
 	}
 
-	character.Pv -= damage
+	c.Pv -= damage
 
-	if character.Pv < 0 {
-		character.Pv = 0
+	if c.Pv < 0 {
+		c.Pv = 0
 	}
 
 	return damage

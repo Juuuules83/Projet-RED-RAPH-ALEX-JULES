@@ -14,7 +14,7 @@ func main() {
 	MenuPrincipal(&character)
 }
 
-func MenuPrincipal(character *player.Character) {
+func MenuPrincipal(c *player.Character) {
 	for {
 		utils.ClearScreen()
 		utils.PrintTitle()
@@ -30,13 +30,13 @@ func MenuPrincipal(character *player.Character) {
 
 		switch choice {
 		case 1:
-			AfficherPersonnage(character)
+			AfficherPersonnage(c)
 		case 2:
-			Inventaire(character, false)
+			Inventaire(c, false)
 		case 3:
-			Marchand(character)
+			Marchand(c)
 		case 4:
-			Combat(character)
+			Combat(c)
 		case 5:
 			fmt.Println("Au revoir !")
 			return
@@ -47,28 +47,28 @@ func MenuPrincipal(character *player.Character) {
 	}
 }
 
-func AfficherPersonnage(character *player.Character) {
+func AfficherPersonnage(c *player.Character) {
 	utils.ClearScreen()
 	fmt.Println("===== PERSONNAGE =====")
-	fmt.Println("Nom :", character.Name)
-	fmt.Println("Classe :", character.Classe)
-	fmt.Printf("PV : %d/%d\n", character.Pv, character.PvMax)
-	fmt.Println("Niveau :", character.Niveau)
-	fmt.Println("Argent :", character.Money, "€")
+	fmt.Println("Nom :", c.Name)
+	fmt.Println("Classe :", c.Classe)
+	fmt.Printf("PV : %d/%d\n", c.Pv, c.PvMax)
+	fmt.Println("Niveau :", c.Niveau)
+	fmt.Println("Argent :", c.Money, "€")
 	utils.Pause()
 }
 
-func Inventaire(character *player.Character, depuisCombat bool) {
+func Inventaire(c *player.Character, depuisCombat bool) {
 	for {
 		utils.ClearScreen()
 		fmt.Println("===== INVENTAIRE =====")
-		fmt.Printf("Objets : %d/%d\n\n", character.TotalItems(), player.StockageMax)
+		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), player.StockageMax)
 
-		if len(character.Inventory) == 0 {
+		if len(c.Inventory) == 0 {
 			fmt.Println("L'inventaire est vide.")
 		} else {
 			fmt.Println("Objets possédés :")
-			for item, quantity := range character.Inventory {
+			for item, quantity := range c.Inventory {
 				fmt.Printf("- %s : x%d\n", item, quantity)
 			}
 		}
@@ -87,7 +87,7 @@ func Inventaire(character *player.Character, depuisCombat bool) {
 
 		switch choice {
 		case 1:
-			fmt.Println(character.UseLifePotion())
+			fmt.Println(c.UseLifePotion())
 			utils.Pause()
 		case 2:
 			return
@@ -98,12 +98,12 @@ func Inventaire(character *player.Character, depuisCombat bool) {
 	}
 }
 
-func Marchand(character *player.Character) {
+func Marchand(c *player.Character) {
 	for {
 		utils.ClearScreen()
 		fmt.Println("===== MARCHAND =====")
-		fmt.Println("Argent :", character.Money, "€")
-		fmt.Printf("Inventaire : %d/%d\n\n", character.TotalItems(), player.StockageMax)
+		fmt.Println("Argent :", c.Money, "€")
+		fmt.Printf("Inventaire : %d/%d\n\n", c.TotalItems(), player.StockageMax)
 
 		fmt.Println("1. Potion de vie - 10 €")
 		fmt.Println("2. Retour")
@@ -113,7 +113,7 @@ func Marchand(character *player.Character) {
 
 		switch choice {
 		case 1:
-			fmt.Println(trader.BuyLifePotion(character))
+			fmt.Println(trader.BuyLifePotion(c))
 			utils.Pause()
 		case 2:
 			return
@@ -124,7 +124,7 @@ func Marchand(character *player.Character) {
 	}
 }
 
-func Combat(character *player.Character) {
+func Combat(c *player.Character) {
 	monster := combat.InitGoblin()
 	turn := 1
 
@@ -132,7 +132,7 @@ func Combat(character *player.Character) {
 		utils.ClearScreen()
 		fmt.Println("===== COMBAT =====")
 		fmt.Println()
-		fmt.Printf("%s : %d/%d PV\n", character.Name, character.Pv, character.PvMax)
+		fmt.Printf("%s : %d/%d PV\n", c.Name, c.Pv, c.PvMax)
 		fmt.Printf("%s : %d/%d PV\n", monster.Name, monster.Pv, monster.PvMax)
 		fmt.Println()
 
@@ -145,7 +145,7 @@ func Combat(character *player.Character) {
 
 		switch choice {
 		case 1:
-			damage := combat.PlayerAttack(character, &monster)
+			damage := combat.PlayerAttack(c, &monster)
 			fmt.Printf("\nVous infligez %d dégâts.\n", damage)
 
 			if combat.IsDead(monster.Pv) {
@@ -154,11 +154,11 @@ func Combat(character *player.Character) {
 				return
 			}
 
-			damage = combat.MonsterAttack(character, &monster, turn)
+			damage = combat.MonsterAttack(c, &monster, turn)
 			fmt.Printf("%s vous inflige %d dégâts.\n", monster.Name, damage)
 
-			if combat.IsDead(character.Pv) {
-				character.Pv = 0
+			if combat.IsDead(c.Pv) {
+				c.Pv = 0
 				fmt.Println("\nVous êtes mort. Game Over.")
 				utils.Pause()
 				return
@@ -168,7 +168,7 @@ func Combat(character *player.Character) {
 			utils.Pause()
 
 		case 2:
-			Inventaire(character, true)
+			Inventaire(c, true)
 
 		case 3:
 			return
