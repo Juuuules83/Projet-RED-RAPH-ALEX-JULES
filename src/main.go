@@ -1,13 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
+	"projet-red/player"
+	"projet-red/utils"
+)
+
+// main est le point d'entrée unique du projet.
+// Toute l'initialisation du jeu part d'ici.
 func main() {
-	player := characterCreation()
+	character := player.CharacterCreation()
 
-	//-------------// BUBBLE TEA //----------------//
-	if err := startNavigation(&player); err != nil {
-		fmt.Println("Erreur lors du lancement de l'interface :", err)
+	if err := utils.StartNavigation(&character); err != nil {
+		fmt.Println("Erreur lors du lancement du jeu :", err)
 	}
-	//-------------// FIN BUBBLE TEA //----------------//
 }
