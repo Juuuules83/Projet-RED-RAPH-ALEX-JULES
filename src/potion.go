@@ -37,7 +37,8 @@ func (c *Character) takePot() {
 }
 
 
-func (c *Character) poisonPot() {
+// poisonPot utilise une potion de poison sur l'adversaire (target), pas sur le joueur.
+func (c *Character) poisonPot(target *Monster) {
 	potQuantity, potCheck := c.Inventory[PotionPoison]
 
 	if !potCheck || potQuantity <= 0 {
@@ -47,20 +48,21 @@ func (c *Character) poisonPot() {
 
 	c.Inventory[PotionPoison]--
 
-	fmt.Println(Green + "☠ Vous avez bu une potion de poison..." + Reset)
+	fmt.Printf("%s☠ Vous lancez une potion de poison sur %s...%s\n", Green, target.Name, Reset)
 
 	for second := 1; second <= 3; second++ {
 		time.Sleep(1 * time.Second)
 
-		c.Pv -= 10
-		if c.Pv < 0 {
-			c.Pv = 0
+		target.Pv -= 10
+		if target.Pv < 0 {
+			target.Pv = 0
 		}
 
-		fmt.Printf("%s☠ Poison (%d/3)%s : %s%d/%d PV%s\n",
-			Green, second, Reset, Red, c.Pv, c.PvMax, Reset)
+		fmt.Printf("%s☠ Poison (%d/3)%s : %s%s%s %s%d/%d PV%s\n",
+			Green, second, Reset, Bold, target.Name, Reset, Red, target.Pv, target.PvMax, Reset)
 
-		if isDead(c) {
+		if target.Pv <= 0 {
+			fmt.Printf("%s%s succombe au poison !%s\n", Red, target.Name, Reset)
 			return
 		}
 	}
