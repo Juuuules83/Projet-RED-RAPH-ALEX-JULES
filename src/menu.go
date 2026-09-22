@@ -34,6 +34,7 @@ func mainMenu(player *Character) {
 		printBoxLine(Yellow + "[1]" + Reset + "  Informations du personnage")
 		printBoxLine(Yellow + "[2]" + Reset + "  Accéder à l'inventaire")
 		printBoxLine(Yellow + "[3]" + Reset + "  Combat de test")
+		printBoxLine(Yellow + "[4]" + Reset + "  Marchant")
 		printBoxLine(Yellow + "[0]" + Reset + "  Quitter")
 
 		printBoxSeparator()
@@ -44,30 +45,33 @@ func mainMenu(player *Character) {
 		
 		fmt.Scan(&chose)
 
-		switch chose {
-		case 0:
-			clearScreen()
-			printGameTitle()
-			printBoxLine(Green + Bold + "Merci d'avoir joué !" + Reset)
-			printBoxBottom()
-			return
+switch chose {
+case 0:
+    clearScreen()
+    printGameTitle()
+    printBoxLine(Green + Bold + "Merci d'avoir joué !" + Reset)
+    printBoxBottom()
+    return
 
-		case 1:
-			displayInfo(*player)
+case 1:
+    displayInfo(*player)
 
-		case 2:
-			player.accessInventory()
+case 2:
+    player.accessInventory()
 
-		case 3:
-			testCombat(player)
+case 3:
+    testCombat(player)
 
-		default:
-			clearScreen()
-			printGameTitle()
-			printBoxLine(Red + Bold + "ERREUR" + Reset)
-			printBoxLine("Option invalide. Veuillez réessayer.")
-			printBoxBottom()
-			waitForEnter()
-		}
+case 4:
+     player.Trader()
+
+default:
+    clearScreen()
+    printGameTitle()
+    printBoxLine(Red + Bold + "ERREUR" + Reset)
+    printBoxLine("Option invalide. Veuillez réessayer.")
+    printBoxBottom()
+    waitForEnter()
+}
 	}
 }

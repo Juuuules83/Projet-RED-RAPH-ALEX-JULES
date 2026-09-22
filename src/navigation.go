@@ -16,6 +16,7 @@ const (
 	mainScreen navigationScreen = iota
 	infoScreen
 	inventoryScreen
+	merchantScreen
 	combatScreen
 	combatInventoryScreen
 	combatResultScreen
@@ -78,11 +79,17 @@ func (m *navigationModel) moveCursor(direction int) {
 func (m navigationModel) optionCount() int {
 	switch m.screen {
 	case mainScreen:
-		return 4
+		return 5
+
 	case inventoryScreen, combatInventoryScreen:
 		return 2
+
+	case merchantScreen:
+		return 2
+
 	case combatScreen:
 		return 3
+
 	default:
 		return 0
 	}
@@ -92,8 +99,8 @@ func (m navigationModel) goBack() (tea.Model, tea.Cmd) {
 	switch m.screen {
 	case mainScreen:
 		return m, tea.Quit
-	case infoScreen, inventoryScreen, combatScreen, combatResultScreen:
-		m.screen = mainScreen
+case infoScreen, inventoryScreen, merchantScreen, combatScreen, combatResultScreen:
+	m.screen = mainScreen
 	case combatInventoryScreen:
 		m.screen = combatScreen
 	}
@@ -105,19 +112,48 @@ func (m navigationModel) goBack() (tea.Model, tea.Cmd) {
 
 func (m navigationModel) validateChoice() (tea.Model, tea.Cmd) {
 	switch m.screen {
-	case mainScreen:
-		switch m.cursor {
-		case 0:
-			m.screen = infoScreen
-		case 1:
-			m.screen = inventoryScreen
-		case 2:
-			m.screen = combatScreen
-			m.monster = initGoblin()
-			m.combatTurn = 1
-		case 3:
-			return m, tea.Quit
+case mainScreen:
+	switch m.cursor {
+	case 0:
+		// Informations
+		m.screen = infoScreen
+
+	case 1:
+		// Inventaire
+		m.screen = inventoryScreen
+
+	case 2:
+		// Marchand
+		m.screen = merchantScreen
+
+	case 3:
+		// Combat
+		m.screen = combatScreen
+		m.monster = initGoblin()
+		m.combatTurn = 1
+
+	case 4:
+		// Quitter
+		return m, tea.Quit
+	}
+
+// CASE MARCHANT : 
+case merchantScreen:
+	switch m.cursor {
+	case 0:
+		if m.player.Money < 10 {
+			m.statusMessage = "Vous n'avez pas assez d'argent."
+		} else {
+			m.player.Money -= 10
+			m.player.AddInventory(PotionVie, 1)
+			m.statusMessage = "Vous avez acheté une potion de vie pour 10€."
 		}
+
+	case 1:
+		m.screen = mainScreen
+		m.cursor = 0
+	}
+
 	case infoScreen:
 		m.screen = mainScreen
 	case inventoryScreen:
@@ -132,6 +168,7 @@ func (m navigationModel) validateChoice() (tea.Model, tea.Cmd) {
 		} else {
 			m.screen = combatScreen
 		}
+		
 	case combatScreen:
 		switch m.cursor {
 		case 0:
@@ -205,14 +242,22 @@ func (m navigationModel) View() string {
 	switch m.screen {
 	case infoScreen:
 		return m.renderInfo()
+
 	case inventoryScreen:
 		return m.renderInventory(false)
+
+	case merchantScreen:
+		return m.renderMerchant()
+
 	case combatScreen:
 		return m.renderCombat()
+
 	case combatInventoryScreen:
 		return m.renderInventory(true)
+
 	case combatResultScreen:
 		return renderNavigationResult(m.statusMessage)
+
 	default:
 		return m.renderMainMenu()
 	}
@@ -231,8 +276,9 @@ func (m navigationModel) renderMainMenu() string {
 	_, _ = builder.WriteString(renderNavigationHeading("MENU PRINCIPAL", Magenta))
 	_, _ = builder.WriteString(renderNavigationOption("Informations du personnage", m.cursor == 0) + "\n")
 	_, _ = builder.WriteString(renderNavigationOption("Acceder a l'inventaire", m.cursor == 1) + "\n")
-	_, _ = builder.WriteString(renderNavigationOption("Combat de test", m.cursor == 2) + "\n")
-	_, _ = builder.WriteString(renderNavigationOption("Quitter", m.cursor == 3))
+_, _ = builder.WriteString(renderNavigationOption("Marchand", m.cursor == 2) + "\n")
+_, _ = builder.WriteString(renderNavigationOption("Combat de test", m.cursor == 3) + "\n")
+_, _ = builder.WriteString(renderNavigationOption("Quitter", m.cursor == 4))
 	_, _ = builder.WriteString(renderNavigationFooter("↑ ↓ naviguer  •  Entree valider  •  Echap quitter"))
 
 	return builder.String()
@@ -286,6 +332,28 @@ func (m navigationModel) renderInventory(fromCombat bool) string {
 	}
 
 	return renderNavigationScreen("INVENTAIRE", Magenta, lines, "↑ ↓ naviguer  •  Entree valider  •  Echap retour")
+}
+
+// MARCHANT 
+func (m navigationModel) renderMerchant() string {
+	lines := []string{
+		"☕ Potion de vie",
+		"💰 Prix : 10",
+		"",
+		renderNavigationOption("Acheter", m.cursor == 0),
+		renderNavigationOption("Retour", m.cursor == 1),
+	}
+
+	if m.statusMessage != "" {
+		lines = append(lines, "", Green+m.statusMessage+Reset)
+	}
+
+	return renderNavigationScreen(
+		"MARCHAND",
+		Green,
+		lines,
+		"↑ ↓ naviguer  •  Entrée acheter  •  Echap retour",
+	)
 }
 
 func (m navigationModel) renderCombat() string {

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func (c *Character) Trader(ItemName string, price int) {
+func (c *Character) Trader() {
 
 	switch chose {
 	case 0:
