@@ -4,9 +4,6 @@ import "fmt"
 
 func (c *Character) Trader(ItemName string, price int) {
 
-	//variable à supprimer, juste là pour enlever l'erreur
-	var chose int
-
 	switch chose {
 	case 0:
 		clearScreen()
