@@ -28,7 +28,7 @@ func goblinPattern(goblin *Monster, player *Character, turn int) {
 
 //-------------------// TOUR DU PERSONNAGE //-------------------//
 // characterTurn : gère un tour de joueur.
-// Le joueur peut attaquer ou ouvrir son inventaire.	
+// Le joueur peut attaquer ou ouvrir son inventaire.
 func characterTurn(player *Character, monster *Monster) {
 	for {
 		clearScreen()
@@ -66,11 +66,11 @@ func characterTurn(player *Character, monster *Monster) {
 				monster.Pv = 0
 			}
 
-fmt.Printf("%s utilise Attaque basique et inflige %d dégâts à %s.\n", player.Name, basicAttackDamage, monster.Name)
-fmt.Printf("%s : PV %d/%d\n", monster.Name, monster.Pv, monster.PvMax)
-waitForEnter()
+			fmt.Printf("%s utilise Attaque basique et inflige %d dégâts à %s.\n", player.Name, basicAttackDamage, monster.Name)
+			fmt.Printf("%s : PV %d/%d\n", monster.Name, monster.Pv, monster.PvMax)
+			waitForEnter()
 
-return
+			return
 
 		case 2:
 			player.accessInventory()
@@ -99,22 +99,22 @@ func testCombat(player *Character) {
 
 		characterTurn(player, &goblin)
 
-// Si le gobelin est mort, le combat est terminé.
-if goblin.Pv <= 0 {
-    clearScreen()
+		// Si le gobelin est mort, le combat est terminé.
+		if goblin.Pv <= 0 {
+			clearScreen()
 
-    //-------------------// VICTOIRE //-------------------//
-    printGameTitle()
-    printBoxTitle("VICTOIRE")
-    printBoxLine(Green + Bold + "Le Gobelin d'entraînement est vaincu !" + Reset)
-    printBoxLine(fmt.Sprintf("%s a remporté le combat !", player.Name))
-    printBoxBottom()
+			//-------------------// VICTOIRE //-------------------//
+			printGameTitle()
+			printBoxTitle("VICTOIRE")
+			printBoxLine(Green + Bold + "Le Gobelin d'entraînement est vaincu !" + Reset)
+			printBoxLine(fmt.Sprintf("%s a remporté le combat !", player.Name))
+			printBoxBottom()
 
-    waitForEnter()
-    return
-    //-------------------// FIN VICTOIRE //-------------------//
-}
-//-------------------// COMBAT DE TEST //-------------------//
+			waitForEnter()
+			return
+			//-------------------// FIN VICTOIRE //-------------------//
+		}
+		//-------------------// COMBAT DE TEST //-------------------//
 		// Tour du gobelin
 		goblinPattern(&goblin, player, turn)
 
@@ -128,5 +128,5 @@ if goblin.Pv <= 0 {
 		turn++
 	}
 }
-//-------------------// FIN COMBAT DE TEST //-------------------//
 
+//-------------------// FIN COMBAT DE TEST //-------------------//

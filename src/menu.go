@@ -60,7 +60,7 @@ func mainMenu(player *Character) {
 			player.accessInventory()
 
 		case 3:
-    	testCombat(player)
+			testCombat(player)
 
 		default:
 			clearScreen()

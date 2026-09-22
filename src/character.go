@@ -2,12 +2,12 @@ package main
 
 // Character représente le personnage du joueur.
 type Character struct {
-	Name       string
-	Classe     string
-	PvMax      int
-	Pv         int
+	Name      string
+	Classe    string
+	PvMax     int
+	Pv        int
 	Inventory map[string]int
-	Money int
+	Money     int
 }
 
 // initCharacter initialise les informations du personnage.

@@ -50,14 +50,14 @@ func printGameTitle() {
 		"██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║█████╗  ███████║██║     ██║     ",
 		"██║  ██║██║   ██║██║███╗██║██║╚██╗██║██╔══╝  ██╔══██║██║     ██║     ",
 		"██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║██║     ██║  ██║███████╗███████╗",
-		"╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝",                                                  	
+		"╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝",
 	}
 
 	for _, line := range logo {
 		fmt.Println(
-			Cyan+"║"+Reset+
-				centerPlain(line, menuWidth)+
-				Cyan+"║"+Reset,
+			Cyan + "║" + Reset +
+				centerPlain(line, menuWidth) +
+				Cyan + "║" + Reset,
 		)
 	}
 
@@ -66,9 +66,9 @@ func printGameTitle() {
 	subtitle := Bold + Magenta + "O F   G O P H E R" + Reset
 
 	fmt.Println(
-		Cyan+"║"+Reset+
-			centerStyled(subtitle, "O F   G O P H E R", menuWidth)+
-			Cyan+"║"+Reset,
+		Cyan + "║" + Reset +
+			centerStyled(subtitle, "O F   G O P H E R", menuWidth) +
+			Cyan + "║" + Reset,
 	)
 
 	fmt.Println(Cyan + "║" + Reset + strings.Repeat(" ", menuWidth) + Cyan + "║" + Reset)
