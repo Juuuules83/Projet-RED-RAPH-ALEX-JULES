@@ -33,11 +33,6 @@ const menuWidth = 76
 
 // --------------- TITRE DU JEU ---------------
 
-// printGameTitle affiche le logo ASCII de Rise of Gopher.
-// Le titre est volontairement grand : il donne immédiatement une identité
-// visuelle au jeu avant même que le joueur arrive au menu.
-// --------------- TITRE DU JEU ---------------
-
 func printGameTitle() {
 	border := "╔" + strings.Repeat("═", menuWidth) + "╗"
 
