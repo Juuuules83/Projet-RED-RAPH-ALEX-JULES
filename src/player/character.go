@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
+
+	"projet-red/utils"
 )
 
 const (
 	PotionVie    = "potion de vie"
 	PotionPoison = "potion de poison"
+	StockageMax  = 10
 )
 
-// Character représente le personnage du joueur.
 type Character struct {
 	Name      string
 	Classe    string
@@ -23,7 +25,6 @@ type Character struct {
 	Money     int
 }
 
-// InitCharacter initialise un personnage avec ses valeurs de départ.
 func (c *Character) InitCharacter(name string, classe string) {
 	c.Name = name
 	c.Classe = classe
@@ -43,6 +44,7 @@ func (c *Character) InitCharacter(name string, classe string) {
 	}
 
 	c.Pv = c.PvMax / 2
+
 	c.Inventory = map[string]int{
 		PotionVie:    3,
 		PotionPoison: 1,
@@ -74,40 +76,33 @@ func formatName(name string) string {
 	return string(runes)
 }
 
-// CharacterCreation crée le personnage au lancement du jeu.
 func CharacterCreation() Character {
 	var character Character
-
 	var name string
+
 	for {
-		fmt.Print("Entrez le nom de votre personnage (lettres uniquement) : ")
-		if _, err := fmt.Scan(&name); err != nil {
-			fmt.Println("Erreur de saisie. Veuillez réessayer.")
-			continue
-		}
+		fmt.Print("Entrez le nom de votre personnage : ")
+		name = utils.ReadLine()
 
 		if isLettersOnly(name) {
 			break
 		}
 
-		fmt.Println("Le nom ne doit contenir que des lettres.")
+		fmt.Println("Le nom doit contenir uniquement des lettres.")
 	}
 
 	name = formatName(name)
 
 	var classe string
-	for {
-		fmt.Println("Choisissez votre classe :")
-		fmt.Println("[1] AI & Data")
-		fmt.Println("[2] Info")
-		fmt.Println("[3] Cyber")
-		fmt.Print("> ")
 
-		var choice int
-		if _, err := fmt.Scan(&choice); err != nil {
-			fmt.Println("Veuillez entrer un nombre.")
-			continue
-		}
+	for {
+		fmt.Println("\nChoisissez votre classe :")
+		fmt.Println("1. AI & Data")
+		fmt.Println("2. Info")
+		fmt.Println("3. Cyber")
+		fmt.Print("Choix : ")
+
+		choice := utils.ReadInt()
 
 		switch choice {
 		case 1:
@@ -117,9 +112,10 @@ func CharacterCreation() Character {
 		case 3:
 			classe = "Cyber"
 		default:
-			fmt.Println("Option invalide. Veuillez réessayer.")
+			fmt.Println("Choix invalide.")
 			continue
 		}
+
 		break
 	}
 
@@ -127,9 +123,6 @@ func CharacterCreation() Character {
 	return character
 }
 
-// ------- DEBUT INVENTAIRE -------//
-
-// AddInventory ajoute des objets sans dépasser la capacité maximale.
 func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
 	if itemQuantity <= 0 || itemName == "" {
 		return false
@@ -143,18 +136,19 @@ func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
 	return true
 }
 
-// RemoveInventory retire des objets et supprime automatiquement une ligne à 0.
 func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 	if itemQuantity <= 0 {
 		return false
 	}
 
 	quantity, exists := c.Inventory[itemName]
+
 	if !exists || quantity < itemQuantity {
 		return false
 	}
 
 	quantity -= itemQuantity
+
 	if quantity == 0 {
 		delete(c.Inventory, itemName)
 	} else {
@@ -164,31 +158,30 @@ func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 	return true
 }
 
-// TotalItems retourne le nombre total d'objets transportés.
 func (c *Character) TotalItems() int {
 	total := 0
+
 	for _, quantity := range c.Inventory {
-		if quantity > 0 {
-			total += quantity
-		}
+		total += quantity
 	}
+
 	return total
 }
 
-// UseLifePotion utilise une potion de vie et renvoie le résultat de l'action.
 func (c *Character) UseLifePotion() string {
-	quantity, exists := c.Inventory[PotionVie]
-	if !exists || quantity <= 0 {
+	quantity := c.Inventory[PotionVie]
+
+	if quantity <= 0 {
 		return "Vous n'avez plus de potion de vie."
 	}
 
 	c.Pv += 50
+
 	if c.Pv > c.PvMax {
 		c.Pv = c.PvMax
 	}
 
 	c.RemoveInventory(PotionVie, 1)
-	return fmt.Sprintf("Potion utilisée : %d/%d PV.", c.Pv, c.PvMax)
-}
 
-// ------- FIN INVENTAIRE -------//
+	return fmt.Sprintf("Potion utilisée. PV : %d/%d", c.Pv, c.PvMax)
+}

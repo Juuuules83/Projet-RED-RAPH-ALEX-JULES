@@ -1,113 +1,73 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
+	"strconv"
 	"strings"
 )
 
-const (
-	Reset     = "\033[0m"
-	Red       = "\033[31m"
-	Green     = "\033[32m"
-	Yellow    = "\033[33m"
-	Blue      = "\033[34m"
-	Magenta   = "\033[35m"
-	Cyan      = "\033[36m"
-	White     = "\033[37m"
-	Bold      = "\033[1m"
-	Italic    = "\033[3m"
-	Underline = "\033[4m"
+var reader = bufio.NewReader(os.Stdin)
 
-	MenuWidth = 76
+const (
+	Reset   = "\033[0m"
+	Cyan    = "\033[36m"
+	Yellow  = "\033[33m"
+	Green   = "\033[32m"
+	Red     = "\033[31m"
+	Magenta = "\033[35m"
+	Bold    = "\033[1m"
 )
 
-func CenterPlain(text string, width int) string {
-	padding := width - len([]rune(text))
-	if padding <= 0 {
-		return text
-	}
-	left := padding / 2
-	right := padding - left
-	return strings.Repeat(" ", left) + text + strings.Repeat(" ", right)
-}
-
-func CenterStyled(styledText, plainText string, width int) string {
-	padding := width - len([]rune(plainText))
-	if padding <= 0 {
-		return styledText
-	}
-	left := padding / 2
-	right := padding - left
-	return strings.Repeat(" ", left) + styledText + strings.Repeat(" ", right)
-}
-
-func StripANSI(text string) string {
-	for _, code := range []string{Reset, Red, Green, Yellow, Blue, Magenta, Cyan, White, Bold, Italic, Underline} {
-		text = strings.ReplaceAll(text, code, "")
-	}
-	return text
-}
-
-func PrintGameTitle() string {
-	logo := []string{
-		"██████╗  ██████╗ ██╗    ██╗███╗   ██╗███████╗ █████╗ ██╗     ██╗     ",
-		"██╔══██╗██╔═══██╗██║    ██║████╗  ██║██╔════╝██╔══██╗██║     ██║     ",
-		"██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║█████╗  ███████║██║     ██║     ",
-		"██║  ██║██║   ██║██║███╗██║██║╚██╗██║██╔══╝  ██╔══██║██║     ██║     ",
-		"██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║██║     ██║  ██║███████╗███████╗",
-		"╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝",
-	}
-
-	var builder strings.Builder
-	for _, line := range logo {
-		builder.WriteString(Cyan + CenterPlain(line, MenuWidth) + Reset + "\n")
-	}
-	return builder.String()
-}
-
-func PrintBoxTitle(title string) string {
-	border := "╔" + strings.Repeat("═", MenuWidth) + "╗"
-	return Cyan + border + Reset + "\n" +
-		Cyan + "║" + Reset + CenterStyled(Bold+Magenta+title+Reset, title, MenuWidth) + Cyan + "║" + Reset + "\n" +
-		Cyan + "╠" + strings.Repeat("═", MenuWidth) + "╣" + Reset
-}
-
-func PrintBoxLine(text string) string {
-	visibleLength := len([]rune(StripANSI(text)))
-	padding := MenuWidth - 4 - visibleLength
-	if padding < 0 {
-		padding = 0
-	}
-	return Cyan + "║" + Reset + "  " + text + strings.Repeat(" ", padding) + "  " + Cyan + "║" + Reset
-}
-
-func PrintBoxSeparator() string {
-	return Cyan + "╠" + strings.Repeat("─", MenuWidth) + "╣" + Reset
-}
-
-func PrintBoxBottom() string {
-	return Cyan + "╚" + strings.Repeat("═", MenuWidth) + "╝" + Reset
-}
-
 func ClearScreen() {
-	var cmd *exec.Cmd
-	switch runtime.GOOS {
-	case "windows":
-		cmd = exec.Command("cmd", "/c", "cls")
-	default:
-		cmd = exec.Command("clear")
+	var command *exec.Cmd
+
+	if runtime.GOOS == "windows" {
+		command = exec.Command("cmd", "/c", "cls")
+	} else {
+		command = exec.Command("clear")
 	}
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	_ = cmd.Run()
+
+	command.Stdout = os.Stdout
+	command.Stderr = os.Stderr
+	_ = command.Run()
 }
 
-func ExitWithError(err error) {
-	if err == nil {
-		return
+func ReadLine() string {
+	text, _ := reader.ReadString('\n')
+	return strings.TrimSpace(text)
+}
+
+func ReadInt() int {
+	for {
+		text := ReadLine()
+		number, err := strconv.Atoi(text)
+
+		if err == nil {
+			return number
+		}
+
+		fmt.Print("Veuillez entrer un nombre : ")
 	}
-	fmt.Println(Red+"Erreur lors du lancement du jeu :"+Reset, err)
+}
+
+func Pause() {
+	fmt.Print("\nAppuyez sur Entrée pour continuer...")
+	ReadLine()
+}
+
+func PrintTitle() {
+	fmt.Println(Cyan + Bold)
+	fmt.Println("██████╗  ██████╗ ██╗    ██╗███╗   ██╗")
+	fmt.Println("██╔══██╗██╔═══██╗██║    ██║████╗  ██║")
+	fmt.Println("██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║")
+	fmt.Println("██║  ██║██║   ██║██║███╗██║██║╚██╗██║")
+	fmt.Println("██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║")
+	fmt.Println("╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝")
+	fmt.Println(Reset)
+	fmt.Println("            - OF GOPHER -")
+	fmt.Println()
 }

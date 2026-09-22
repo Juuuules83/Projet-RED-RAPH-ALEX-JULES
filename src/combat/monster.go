@@ -1,6 +1,5 @@
 package combat
 
-// Monster représente un adversaire du joueur.
 type Monster struct {
 	Name   string
 	PvMax  int
@@ -8,7 +7,6 @@ type Monster struct {
 	Attack int
 }
 
-// InitGoblin initialise le gobelin d'entraînement.
 func InitGoblin() Monster {
 	return Monster{
 		Name:   "Gobelin d'entraînement",
