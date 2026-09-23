@@ -7,11 +7,7 @@ import (
 	"projet-red/utils"
 )
 
-const (
-	PotionVie    = "potion de vie"
-	PotionPoison = "potion de poison"
-	StockageMax  = 10
-)
+
 
 type Character struct {
 	Name      string
@@ -45,8 +41,8 @@ func (c *Character) InitCharacter(name string, classe string) {
 	c.Pv = c.PvMax / 2
 
 	c.Inventory = map[string]int{
-		PotionVie:    3,
-		PotionPoison: 1,
+		utils.PotionVie:    3,
+		utils.PotionPoison: 1,
 	}
 }
 
@@ -123,9 +119,8 @@ func CharacterCreation() Character {
 }
 
 
-
 func (c *Character) UtiliserPotionVie() string {
-	quantity := c.Inventory[PotionVie]
+	quantity := c.Inventory[utils.PotionVie]
 
 	if quantity <= 0 {
 		return "T'as plus de potion mon reuf... tu vas crever"
@@ -137,7 +132,7 @@ func (c *Character) UtiliserPotionVie() string {
 		c.Pv = c.PvMax
 	}
 
-	c.RemoveInventory(PotionVie, 1)
+	c.RemoveInventory(utils.PotionVie, 1)
 
 	return fmt.Sprintf("Potion utilisée. PV : %d/%d", c.Pv, c.PvMax)
 }
