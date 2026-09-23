@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
-	"projet-red/src/utils"
+	"projet-red/utils"
 )
 
 const (

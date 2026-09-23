@@ -2,8 +2,8 @@ package combat
 
 import (
 	"fmt"
-	"projet-red/src/player"
-	"projet-red/src/utils"
+	"projet-red/player"
+	"projet-red/utils"
 )
 
 const BasicAttackDamage = 5

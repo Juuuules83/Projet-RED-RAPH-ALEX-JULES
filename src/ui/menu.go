@@ -2,10 +2,10 @@ package ui
 
 import (
 	"fmt"
-	"projet-red/src/player"
-	"projet-red/src/utils"
-	"projet-red/src/marchand"
-	"projet-red/src/combat"
+	"projet-red/player"
+	"projet-red/utils"
+	"projet-red/marchand"
+	"projet-red/combat"
 )
 
 func MenuPrincipal(c *player.Character) {

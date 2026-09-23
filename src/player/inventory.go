@@ -2,32 +2,35 @@ package player
 
 import (
 	"fmt"
-	"projet-red/src/utils"
+	"projet-red/utils"
 )
 
-// accessInventory affiche l'inventaire du personnage et gère ses choix.
-func (c *Character) accessInventory() {
-	for true {
-		clearScreen()
+func Inventaire(c *Character, depuisCombat bool) {
+	for {
+		utils.ClearScreen()
+		fmt.Println("===== INVENTAIRE =====")
+		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), StockageMax)
 
-		printBoxTitle("INVENTAIRE")
-
-		for itemName, itemQuantity := range c.Inventaire {
-			printBoxLine(fmt.Sprintf("%s•%s %-22s : %s%d%s",
-				Cyan, Reset,
-				itemName,
-				Bold, itemQuantity, Reset,
-			))
+		if len(c.Inventory) == 0 {
+			fmt.Println("L'inventaire est vide.")
+		} else {
+			fmt.Println("Objets possédés :")
+			for item, quantity := range c.Inventory {
+				fmt.Printf("- %s : x%d\n", item, quantity)
+			}
 		}
 
-		printBoxSeparator()
+		fmt.Println()
+		fmt.Println("1. Utiliser une potion de vie")
 
-		printBoxLine(Yellow + "[1]" + Reset + "  Utiliser une potion")
-		printBoxLine(Yellow + "[0]" + Reset + "  Retour au menu principal")
+		if depuisCombat {
+			fmt.Println("2. Retour au combat")
+		} else {
+			fmt.Println("2. Retour au menu")
+		}
 
-		printBoxSeparator()
-		printBoxLine(Cyan + "Choisissez une option..." + Reset)
-		printBoxBottom()
+		fmt.Print("\nChoix : ")
+		choice := utils.ReadInt()
 
 		switch choice {
 		case 1:
@@ -35,24 +38,9 @@ func (c *Character) accessInventory() {
 			utils.Pause()
 		case 2:
 			return
-
-		case 1:
-			clearScreen()
-
-			printBoxTitle("POTION DE VIE")
-			c.takePot()
-			printBoxBottom()
-
-			waitForEnter()
-
 		default:
-			clearScreen()
-
-			printBoxTitle("ERREUR")
-			printBoxLine(Red + "Option invalide." + Reset)
-			printBoxBottom()
-
-			waitForEnter()
+			fmt.Println("Choix invalide.")
+			utils.Pause()
 		}
 	}
 }
