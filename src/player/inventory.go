@@ -1,6 +1,9 @@
 package player
 
-import "fmt"
+import (
+	"fmt"
+	"projet-red/src/utils"
+)
 
 // accessInventory affiche l'inventaire du personnage et gère ses choix.
 func (c *Character) accessInventory() {
@@ -26,13 +29,11 @@ func (c *Character) accessInventory() {
 		printBoxLine(Cyan + "Choisissez une option..." + Reset)
 		printBoxBottom()
 
-		fmt.Print("\n  > ")
-
-		var chose int
-		fmt.Scan(&chose)
-
-		switch chose {
-		case 0:
+		switch choice {
+		case 1:
+			fmt.Println(c.UtiliserPotionVie())
+			utils.Pause()
+		case 2:
 			return
 
 		case 1:
@@ -56,38 +57,51 @@ func (c *Character) accessInventory() {
 	}
 }
 
-func (c *Character) AddInventory (ItemName string, ItemQuantity int){
-	var TotalItems int
-	for _, value := range(c.Inventory){
-		TotalItems += value
+ func (c *Character) TotalItems() int {
+	total := 0
+
+	for _, quantity := range c.Inventory {
+		total += quantity
 	}
-	if !(TotalItems + ItemQuantity)<= StockageMax{
-		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS !?")
-		return
+
+	return total
+} 
+
+func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
+	if itemQuantity <= 0 || itemName == "" {
+		return false
 	}
-	check := c.Inventory(ItemName)
-	if (check){
-		c.Inventory(ItemName) += ItemQuantity
-	}else{
-		c.Inventory(ItemName)= ItemQuantity
+
+	if c.TotalItems()+itemQuantity > StockageMax {
+		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
+		return false
 	}
-	fmt.Println("+1", ItemName)	
+
+	c.Inventory[itemName] += itemQuantity
+	return true
 }
 
-func (c *Character) RemoveInventory (ItemName string, ItemQuantity int){
-	ItemQuantity, InvCheck := c.Inventory[ItemName]
-	if (InvCheck == false){
-		fmt.Println(ItemName)
-		return
-	}else if (InvCheck && InvQuantity < ItemQuantity){
-		fmt.Println("Quantité insuffisante")
-		return
+func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
+	if itemQuantity <= 0 {
+		return false
 	}
-	if (InvQuantity - ItemQuantity) == 0{
-		delete(c.Inventory, ItemName)
-		return
-	}else{
-		c.Inventory[ItemName]-= ItemQuantity
+
+	quantity, exists := c.Inventory[itemName]
+
+	if !exists || quantity < itemQuantity {
+		return false
 	}
-	fmt.Println("-1", ItemName)	
-}
+
+	quantity -= itemQuantity
+
+	if quantity == 0 {
+		delete(c.Inventory, itemName)
+	} else {
+		c.Inventory[itemName] = quantity
+	}
+
+	return true
+} 
+
+
+
