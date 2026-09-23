@@ -1,7 +1,9 @@
+
+
 package combat
 
 import "projet-red/player"
 
-func UseLifePotion(c *player.Character) string {
-	return c.UtiliserPotionVie()
+func UtiliserPotionVie(c *player.Character) string {
+	return c.UtiliserPotionVie()	
 }

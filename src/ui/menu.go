@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"projet-red/player"
 	"projet-red/utils"
-	"projet-red/marchand"
 	"projet-red/combat"
+	"projet-red/marchand"
 )
 
 func MenuPrincipal(c *player.Character) {

@@ -67,3 +67,15 @@ func PrintTitle() {
 }
 
    var TotalItems int
+   var Choose int
+
+   const (
+	PotionVie    = "potion de vie"
+	PotionPoison = "potion de poison"
+	StockageMax  = 10
+)
+
+ var Countfree int  // mise hors de la fonction sinon ça reprend toujours à 0 lorsque la boucle est recommencé
+ var CountFB int // mise hors de la fonction sinon ça reprend toujours à 0 lorsque la boucle est recommencé
+
+// les Countfree et CountFB sont raccordé au marchand
