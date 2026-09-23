@@ -20,7 +20,7 @@ func AcheterPotionVie(c *player.Character) string {
 	return fmt.Sprintf("Vous avez acheté une potion de vie pour %d €.", PrixPotionVie)
 }
 
-func (c *Character) Trader(ItemName string, price int) {
+func Marchand(c *player.Character) {
  
     //variable à supprimer, juste là pour enlever l'erreur
     var chose int
