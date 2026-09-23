@@ -9,7 +9,7 @@ func Inventaire(c *Character, depuisCombat bool) {
 	for {
 		utils.ClearScreen()
 		fmt.Println("===== INVENTAIRE =====")
-		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), StockageMax)
+		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), utils.StockageMax)
 
 		if len(c.Inventory) == 0 {
 			fmt.Println("L'inventaire est vide.")
@@ -30,9 +30,8 @@ func Inventaire(c *Character, depuisCombat bool) {
 		}
 
 		fmt.Print("\nChoix : ")
-		choice := utils.ReadInt()
 
-		switch choice {
+		switch utils.Choose {
 		case 1:
 			fmt.Println(c.UtiliserPotionVie())
 			utils.Pause()
@@ -45,7 +44,7 @@ func Inventaire(c *Character, depuisCombat bool) {
 	}
 }
 
- func (c *Character) TotalItems() int {
+func (c *Character) TotalItems() int {
 	total := 0
 
 	for _, quantity := range c.Inventory {
@@ -53,14 +52,14 @@ func Inventaire(c *Character, depuisCombat bool) {
 	}
 
 	return total
-} 
+}
 
 func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
 	if itemQuantity <= 0 || itemName == "" {
 		return false
 	}
 
-	if c.TotalItems()+itemQuantity > StockageMax {
+	if c.TotalItems()+itemQuantity > utils.StockageMax {
 		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
 		return false
 	}
@@ -89,7 +88,4 @@ func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 	}
 
 	return true
-} 
-
-
-
+}
