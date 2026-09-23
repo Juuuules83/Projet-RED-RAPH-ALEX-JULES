@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
-	"projet-red/utils"
+	"projet-red/src/utils"
 )
 
 const (
@@ -122,56 +122,13 @@ func CharacterCreation() Character {
 	return character
 }
 
-func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
-	if itemQuantity <= 0 || itemName == "" {
-		return false
-	}
 
-	if c.TotalItems()+itemQuantity > StockageMax {
-		return false
-	}
 
-	c.Inventory[itemName] += itemQuantity
-	return true
-}
-
-func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
-	if itemQuantity <= 0 {
-		return false
-	}
-
-	quantity, exists := c.Inventory[itemName]
-
-	if !exists || quantity < itemQuantity {
-		return false
-	}
-
-	quantity -= itemQuantity
-
-	if quantity == 0 {
-		delete(c.Inventory, itemName)
-	} else {
-		c.Inventory[itemName] = quantity
-	}
-
-	return true
-}
-
-func (c *Character) TotalItems() int {
-	total := 0
-
-	for _, quantity := range c.Inventory {
-		total += quantity
-	}
-
-	return total
-}
-
-func (c *Character) UseLifePotion() string {
+func (c *Character) UtiliserPotionVie() string {
 	quantity := c.Inventory[PotionVie]
 
 	if quantity <= 0 {
-		return "Vous n'avez plus de potion de vie."
+		return "T'as plus de potion mon reuf... tu vas crever"
 	}
 
 	c.Pv += 50
@@ -184,3 +141,4 @@ func (c *Character) UseLifePotion() string {
 
 	return fmt.Sprintf("Potion utilisée. PV : %d/%d", c.Pv, c.PvMax)
 }
+

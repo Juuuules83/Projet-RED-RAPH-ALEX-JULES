@@ -1,8 +1,8 @@
 package main
 
 import (
-	"projet-red/player"
-	"projet-red/ui"
+	"projet-red/src/player"
+	"projet-red/src/ui"
 )
 
 func main() {

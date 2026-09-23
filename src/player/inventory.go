@@ -2,7 +2,7 @@ package player
 
 import (
 	"fmt"
-	"projet-red/utils"
+	"projet-red/src/utils"
 )
 
 func Inventaire(c *Character, depuisCombat bool) {
@@ -34,7 +34,7 @@ func Inventaire(c *Character, depuisCombat bool) {
 
 		switch choice {
 		case 1:
-			fmt.Println(c.UseLifePotion())
+			fmt.Println(c.UtiliserPotionVie())
 			utils.Pause()
 		case 2:
 			return
@@ -45,38 +45,51 @@ func Inventaire(c *Character, depuisCombat bool) {
 	}
 }
 
-func (c *Character) AddInventory (ItemName string, ItemQuantity int){
+ func (c *Character) TotalItems() int {
+	total := 0
 
-   for _, value := c.Inventory{
-       TotalItems += value
-   }
-   If !(TotalItems + ItemQuantity)<= StockageMax{
-       fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
-       return
-   }
-   check := c.Inventory(ItemName)
-   If (check){
-       c.Inventory(ItemName) += ItemQuantity
-   }else{
-       c.Inventory(ItemName)= ItemQuantity
-   }
-   fmt.Println("+1" ItemName)  
+	for _, quantity := range c.Inventory {
+		total += quantity
+	}
+
+	return total
+} 
+
+func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
+	if itemQuantity <= 0 || itemName == "" {
+		return false
+	}
+
+	if c.TotalItems()+itemQuantity > StockageMax {
+		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
+		return false
+	}
+
+	c.Inventory[itemName] += itemQuantity
+	return true
 }
 
-func (c *Character) RemoveInventory (ItemName string, ItemQuantity int){
-   ItemQuantity, InvCheck := c.Inventory[ItemName]
-   if (InvCheck == false){
-       fmt.Println(ItemName)
-       return
-   }else if (InvCheck && InvQuantity < ItemQuantity){
-       fmt.Println("Quantité insuffisante")
-       return
-   }
-   if (InvQuantity - ItemQuantity) == 0{
-       delete(c.Inventory, ItemName)
-       return
-   }else{
-       c.Inventory[ItemName]-= ItemQuantity
-   }
-   fmt.Println("-1", ItemName)
-}
+func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
+	if itemQuantity <= 0 {
+		return false
+	}
+
+	quantity, exists := c.Inventory[itemName]
+
+	if !exists || quantity < itemQuantity {
+		return false
+	}
+
+	quantity -= itemQuantity
+
+	if quantity == 0 {
+		delete(c.Inventory, itemName)
+	} else {
+		c.Inventory[itemName] = quantity
+	}
+
+	return true
+} 
+
+
+

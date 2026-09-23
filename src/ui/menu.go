@@ -2,10 +2,10 @@ package ui
 
 import (
 	"fmt"
-	"projet-red/combat"
-	"projet-red/marchant"
-	"projet-red/player"
-	"projet-red/utils"
+	"projet-red/src/player"
+	"projet-red/src/utils"
+	"projet-red/src/marchand"
+	"projet-red/src/combat"
 )
 
 func MenuPrincipal(c *player.Character) {
@@ -28,7 +28,7 @@ func MenuPrincipal(c *player.Character) {
 		case 2:
 			player.Inventaire(c, false)
 		case 3:
-			marchant.Marchand(c)
+			marchand.Marchand(c)
 		case 4:
 			combat.Combat(c)
 		case 5:

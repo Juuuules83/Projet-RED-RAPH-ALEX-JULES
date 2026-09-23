@@ -1,7 +1,7 @@
 package combat
 
-import "projet-red/player"
+import "projet-red/src/player"
 
 func UseLifePotion(c *player.Character) string {
-	return c.UseLifePotion()
+	return c.UtiliserPotionVie()
 }
