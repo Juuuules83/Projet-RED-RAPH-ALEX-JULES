@@ -2,9 +2,9 @@ package player
 
 import (
 	"fmt"
-	"projet-red/utils"
 	"strings"
 	"unicode"
+	"projet-red/utils"
 )
 
 const (

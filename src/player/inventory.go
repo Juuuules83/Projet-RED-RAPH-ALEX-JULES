@@ -44,3 +44,39 @@ func Inventaire(c *Character, depuisCombat bool) {
 		}
 	}
 }
+
+func (c *Character) AddInventory (ItemName string, ItemQuantity int){
+
+   for _, value := c.Inventory{
+       TotalItems += value
+   }
+   If !(TotalItems + ItemQuantity)<= StockageMax{
+       fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
+       return
+   }
+   check := c.Inventory(ItemName)
+   If (check){
+       c.Inventory(ItemName) += ItemQuantity
+   }else{
+       c.Inventory(ItemName)= ItemQuantity
+   }
+   fmt.Println("+1" ItemName)  
+}
+
+func (c *Character) RemoveInventory (ItemName string, ItemQuantity int){
+   ItemQuantity, InvCheck := c.Inventory[ItemName]
+   if (InvCheck == false){
+       fmt.Println(ItemName)
+       return
+   }else if (InvCheck && InvQuantity < ItemQuantity){
+       fmt.Println("Quantité insuffisante")
+       return
+   }
+   if (InvQuantity - ItemQuantity) == 0{
+       delete(c.Inventory, ItemName)
+       return
+   }else{
+       c.Inventory[ItemName]-= ItemQuantity
+   }
+   fmt.Println("-1", ItemName)
+}

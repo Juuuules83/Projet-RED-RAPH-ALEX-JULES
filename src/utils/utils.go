@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"bufio"   // Lire entrée clavier
-	"fmt"     // Afficher texte
-	"os"      // permet d'écrire dans le CMD
+	"bufio" // Lire entrée clavier
+	"fmt" // Afficher texte
+	"os" // permet d'écrire dans le CMD
 	"os/exec" // Permet d'exécuter des commadandes CMD
 	"strconv" // Convertir string en int
 	"strings" // écrire texte
@@ -22,11 +22,11 @@ const (
 )
 
 func ClearScreen() {
-	command := exec.Command("cmd", "/c", "cls")
-	command.Stdout = os.Stdout
+    command := exec.Command("cmd", "/c", "cls")
+	command.Stdout = os.Stdout  
 	// command.Stdout = ce que la commande veut afficher
 	//os.Stdout = le terminal de mon programme
-
+    
 	_ = command.Run()
 }
 
@@ -66,4 +66,4 @@ func PrintTitle() {
 	fmt.Println()
 }
 
-var TotalItems int
+   var TotalItems int
