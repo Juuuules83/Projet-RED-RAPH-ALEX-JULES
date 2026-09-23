@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
-
 	"projet-red/utils"
 )
 

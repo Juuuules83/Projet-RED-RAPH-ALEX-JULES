@@ -1,13 +1,12 @@
 package utils
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"os/exec"
-	"runtime"
-	"strconv"
-	"strings"
+	"bufio" // Lire entrée clavier
+	"fmt" // Afficher texte
+	"os" // permet d'écrire dans le CMD
+	"os/exec" // Permet d'exécuter des commadandes CMD
+	"strconv" // Convertir string en int
+	"strings" // écrire texte
 )
 
 var reader = bufio.NewReader(os.Stdin)
@@ -23,16 +22,11 @@ const (
 )
 
 func ClearScreen() {
-	var command *exec.Cmd
-
-	if runtime.GOOS == "windows" {
-		command = exec.Command("cmd", "/c", "cls")
-	} else {
-		command = exec.Command("clear")
-	}
-
-	command.Stdout = os.Stdout
-	command.Stderr = os.Stderr
+    command := exec.Command("cmd", "/c", "cls")
+	command.Stdout = os.Stdout  
+	// command.Stdout = ce que la commande veut afficher
+	//os.Stdout = le terminal de mon programme
+    
 	_ = command.Run()
 }
 
@@ -71,3 +65,5 @@ func PrintTitle() {
 	fmt.Println("            - OF GOPHER -")
 	fmt.Println()
 }
+
+   var TotalItems int
