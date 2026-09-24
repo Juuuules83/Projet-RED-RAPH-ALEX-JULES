@@ -7,7 +7,7 @@ import (
 	"projet-red/combat"
 )
 
-func Marchand(c *player.Character) {
+func Artisant(c *player.Character) {
  
     switch utils.Choose {
     case 0:
@@ -53,7 +53,7 @@ func Marchand(c *player.Character) {
      case 4:
         if c.Money >= 4 && utils.StockageMax > utils.TotalItems {
             fmt.Println("fourrure de loup [4]")
-            c.AddInventory("fourrure de loup", 1)
+            c.AddInventory(WolfFurr, 1)
             c.Money -= 4 
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -61,7 +61,7 @@ func Marchand(c *player.Character) {
      case 5:
         if c.Money >= 7 && utils.StockageMax > utils.TotalItems {
             fmt.Println("peau de troll [7]")
-            c.AddInventory("peau de troll", 1)
+            c.AddInventory(TrollSkin, 1)
             c.Money -= 7
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -69,7 +69,7 @@ func Marchand(c *player.Character) {
      case 6:
         if c.Money >= 3 && utils.StockageMax > utils.TotalItems {
             fmt.Println("cuir de sanglier [3]")
-            c.AddInventory("cuir de sanglier", 1)
+            c.AddInventory(WildBoarLeather, 1)
             c.Money -= 3
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -77,7 +77,7 @@ func Marchand(c *player.Character) {
     case 7:
         if c.Money >= 1 && utils.StockageMax > utils.TotalItems {
             fmt.Println("plume de corbeau [1]")
-            c.AddInventory("plume de corbeau", 1)
+            c.AddInventory(CrowFeather, 1)
             c.Money -= 1
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
