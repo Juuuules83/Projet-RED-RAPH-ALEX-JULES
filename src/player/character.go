@@ -119,21 +119,4 @@ func CharacterCreation() Character {
 }
 
 
-func (c *Character) UtiliserPotionVie() string {
-	quantity := c.Inventory[utils.PotionVie]
-
-	if quantity <= 0 {
-		return "T'as plus de potion mon reuf... tu vas crever"
-	}
-
-	c.Pv += 50
-
-	if c.Pv > c.PvMax {
-		c.Pv = c.PvMax
-	}
-
-	c.RemoveInventory(utils.PotionVie, 1)
-
-	return fmt.Sprintf("Potion utilisée. PV : %d/%d", c.Pv, c.PvMax)
-}
 

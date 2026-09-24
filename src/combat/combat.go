@@ -7,6 +7,7 @@ import (
 )
 
 const BasicAttackDamage = 5
+const FireBallDamage = 20
 
 func PlayerAttack(c *player.Character, m *Monster) int {
 	m.Pv -= BasicAttackDamage
@@ -16,6 +17,16 @@ func PlayerAttack(c *player.Character, m *Monster) int {
 	}
 
 	return BasicAttackDamage
+}
+
+func FireBall(c *player.Character, m *Monster) int {
+	m.Pv -= FireBallDamage
+
+	if m.Pv < 0 {
+		m.Pv = 0
+	}
+
+	return FireBallDamage
 }
 
 func MonsterAttack(c *player.Character, m *Monster, t int) int {
@@ -54,28 +65,68 @@ func Combat(c *player.Character) {
 		choice := utils.ReadInt()
 
 		switch choice {
-		case 1:
-			damage := PlayerAttack(c, &monster)
-			fmt.Printf("\nVous infligez %d dégâts.\n", damage)
 
-			if IsDead(monster.Pv) {
-				fmt.Println("Victoire ! Le gobelin est vaincu.")
-				utils.Pause()
-				return
-			}
+case 1:
+    utils.ClearScreen()
 
-			damage = MonsterAttack(c, &monster, turn)
-			fmt.Printf("%s vous inflige %d dégâts.\n", monster.Name, damage)
+    fmt.Println("===== CHOISIR UNE ATTAQUE =====")
+    fmt.Println()
+    fmt.Println("1. Attaque de base (5 dégâts)")
+    fmt.Println("2. Fireball (20 dégâts)")
+    fmt.Println("3. Retour")
+    fmt.Print("\nChoix : ")
 
-			if IsDead(c.Pv) {
-				c.Pv = 0
-				fmt.Println("\nVous êtes mort. Game Over.")
-				utils.Pause()
-				return
-			}
+    attackChoice := utils.ReadInt()
 
-			turn++
-			utils.Pause()
+    var damage int
+
+    switch attackChoice {
+    case 1:
+        damage = PlayerAttack(c, &monster)
+        fmt.Printf(
+            "\nVous infligez %d dégâts avec votre attaque de base.\n",
+            damage,
+        )
+
+    case 2:
+        damage = FireBall(c, &monster)
+        fmt.Printf(
+            "\nVous infligez %d dégâts avec Fireball !\n",
+            damage,
+        )
+
+    case 3:
+        continue
+
+    default:
+        fmt.Println("Choix invalide.")
+        utils.Pause()
+        continue
+    }
+
+    if IsDead(monster.Pv) {
+        fmt.Println("Victoire ! Le gobelin est vaincu.")
+        utils.Pause()
+        return
+    }
+
+    damage = MonsterAttack(c, &monster, turn)
+
+    fmt.Printf(
+        "%s vous inflige %d dégâts.\n",
+        monster.Name,
+        damage,
+    )
+
+    if IsDead(c.Pv) {
+        c.Pv = 0
+        fmt.Println("\nT'es NUL ! \n...Game Over...")
+        utils.Pause()
+        return
+    }
+
+    turn++
+    utils.Pause()
 
 		case 2:
 			player.Inventaire(c, true)

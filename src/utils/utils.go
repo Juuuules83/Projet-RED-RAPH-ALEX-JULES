@@ -72,6 +72,11 @@ func PrintTitle() {
    const (
 	PotionVie    = "potion de vie"
 	PotionPoison = "potion de poison"
+	FireBall    = "boule de feu"
+	WolfFurr    = "fourrure de loup"
+	TrollSkin   = "peau de troll"
+	BoarLeather = "cuir de sanglier"
+	RavenFeather = "plume de corbeau"
 	StockageMax  = 10
 )
 

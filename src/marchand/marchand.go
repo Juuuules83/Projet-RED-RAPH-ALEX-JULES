@@ -24,7 +24,7 @@ func AcheterPotionVie(c *player.Character) string {
     )
 }
 
-/* func Marchand(c *player.Character) {
+func Marchand(c *player.Character) {
  
     switch utils.Choose {
     case 0:
@@ -40,7 +40,7 @@ func AcheterPotionVie(c *player.Character) string {
             c.AddInventory(utils.PotionVie, 1)
         }else if c.Money >= 10 && utils.StockageMax > utils.TotalItems {
             fmt.Println("potion de vie [10]")
-            c.AddInventory("PotionPoison", 1)
+            c.AddInventory(utils.PotionVie, 1)
             c.Money -= 10
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -56,9 +56,9 @@ func AcheterPotionVie(c *player.Character) string {
         }
     case 3:
         if utils.CountFB > 0{
-            if combat.FireBall >= 75 && utils.StockageMax > utils.TotalItems {
+            if c.Money >= 75 && utils.StockageMax > utils.TotalItems {
                 fmt.Println("Sort : boule de feu [75]")
-                c.AddInventory("FireBall", 1)
+                c.AddInventory(utils.FireBall, 1)
                 c.Money -= 75
                 utils.CountFB++
             }else{
@@ -70,7 +70,7 @@ func AcheterPotionVie(c *player.Character) string {
      case 4:
         if c.Money >= 4 && utils.StockageMax > utils.TotalItems {
             fmt.Println("fourrure de loup [4]")
-            c.AddInventory("WolfFurr", 1)
+            c.AddInventory(utils.WolfFurr, 1)
             c.Money -= 4 
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -78,7 +78,7 @@ func AcheterPotionVie(c *player.Character) string {
      case 5:
         if c.Money >= 7 && utils.StockageMax > utils.TotalItems {
             fmt.Println("peau de troll [7]")
-            c.AddInventory("TrollSkin", 1)
+            c.AddInventory(utils.TrollSkin, 1)
             c.Money -= 7
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -86,7 +86,7 @@ func AcheterPotionVie(c *player.Character) string {
      case 6:
         if c.Money >= 3 && utils.StockageMax > utils.TotalItems {
             fmt.Println("cuir de sanglier [3]")
-            c.AddInventory("WildBoarLeather", 1)
+            c.AddInventory(utils.BoarLeather, 1)
             c.Money -= 3
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -94,7 +94,7 @@ func AcheterPotionVie(c *player.Character) string {
     case 7:
         if c.Money >= 1 && utils.StockageMax > utils.TotalItems {
             fmt.Println("plume de corbeau [1]")
-            c.AddInventory("CrowFeather", 1)
+            c.AddInventory(utils.RavenFeather, 1)
             c.Money -= 1
         }else{
             fmt.Println("Pas assez d'argent ou d'espace dans l'inventaire")
@@ -103,10 +103,10 @@ func AcheterPotionVie(c *player.Character) string {
         utils.ClearScreen()
         fmt.Println("Option invalide. Veuillez réessayer.")
     }
-} */
+} 
 
 
-func Marchand(c *player.Character) {
+/* func Marchand(c *player.Character) {
     for {
         utils.ClearScreen()
 
@@ -206,4 +206,4 @@ func Marchand(c *player.Character) {
 
         utils.Pause()
     }
-}
+} */
