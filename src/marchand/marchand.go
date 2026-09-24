@@ -9,15 +9,19 @@ import (
 const PrixPotionVie = 10
 
 func AcheterPotionVie(c *player.Character) string {
-	if c.Money < PrixPotionVie {
-		return "Vous n'avez pas assez d'argent."
-	}
-	if c.TotalItems() >= utils.StockageMax {
-		return "Votre inventaire est plein."
-	}
+    if c.Money < PrixPotionVie {
+        return "trop pauvre espèce de GUEUX !!! BOUUUUH LA LA LA LA LA LA"
+    }
 
-	c.Money -= PrixPotionVie
-	return fmt.Sprintf("Vous avez acheté une potion de vie pour %d €.", PrixPotionVie)
+    if !c.AddInventory(utils.PotionVie, 1) {
+        return "Achat impossible."
+    }
+
+    c.Money -= PrixPotionVie
+
+    return fmt.Sprintf(
+        "Potion achetée !",
+    )
 }
 
 /* func Marchand(c *player.Character) {
