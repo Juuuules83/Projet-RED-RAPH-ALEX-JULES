@@ -31,7 +31,8 @@ func Inventaire(c *Character, depuisCombat bool) {
 
 		fmt.Print("\nChoix : ")
 
-		switch utils.Choose {
+	choice := utils.ReadInt()
+	switch choice {
 		case 1:
 			fmt.Println(c.UtiliserPotionVie())
 			utils.Pause()
