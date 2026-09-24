@@ -10,7 +10,6 @@ func Inventaire(c *Character, depuisCombat bool) {
 		utils.ClearScreen()
 		fmt.Println("===== INVENTAIRE =====")
 		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), utils.StockageMax)
-
 		if len(c.Inventory) == 0 {
 			fmt.Println("L'inventaire est vide.")
 		} else {
@@ -21,14 +20,12 @@ func Inventaire(c *Character, depuisCombat bool) {
 		}
 
 		fmt.Println()
-		fmt.Println("1. Utiliser une potion de vie")
-
+		fmt.Println("1. Boire un Café") 
 		if depuisCombat {
 			fmt.Println("2. Retour au combat")
 		} else {
 			fmt.Println("2. Retour au menu")
 		}
-
 		fmt.Print("\nChoix : ")
 
 	choice := utils.ReadInt()
@@ -47,11 +44,9 @@ func Inventaire(c *Character, depuisCombat bool) {
 
 func (c *Character) TotalItems() int {
 	total := 0
-
 	for _, quantity := range c.Inventory {
 		total += quantity
 	}
-
 	return total
 }
 
@@ -64,7 +59,6 @@ func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
 		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
 		return false
 	}
-
 	c.Inventory[itemName] += itemQuantity
 	return true
 }
@@ -75,19 +69,16 @@ func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 	}
 
 	quantity, exists := c.Inventory[itemName]
-
 	if !exists || quantity < itemQuantity {
 		return false
 	}
 
 	quantity -= itemQuantity
-
 	if quantity == 0 {
 		delete(c.Inventory, itemName)
 	} else {
 		c.Inventory[itemName] = quantity
 	}
-
 	return true
 }
 
@@ -96,19 +87,17 @@ func (c *Character) UtiliserPotionVie() string {
     quantity := c.Inventory[utils.PotionVie]
 
     if quantity <= 0 {
-        return "T'as plus de potion mon reuf... tu vas crever"
+        return "T’as plus de Café du dev, mon reuf... tu vas manquer d’énergie !"
     }
 
     c.Pv += 50
-
     if c.Pv > c.PvMax {
         c.Pv = c.PvMax
     }
 
     c.RemoveInventory(utils.PotionVie, 1)
-
     return fmt.Sprintf(
-        "Potion utilisée. PV : %d/%d",
+        "miam le café ! PV : %d/%d",
         c.Pv,
         c.PvMax,
     )

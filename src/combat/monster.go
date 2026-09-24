@@ -9,7 +9,7 @@ type Monster struct {
 
 func InitGoblin() Monster {
 	return Monster{
-		Name:   "Gobelin d'entraînement",
+		Name:   "Capture the Flag",
 		PvMax:  40,
 		Pv:     40,
 		Attack: 5,

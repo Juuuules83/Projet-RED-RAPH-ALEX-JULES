@@ -15,7 +15,6 @@ func PlayerAttack(c *player.Character, m *Monster) int {
 	if m.Pv < 0 {
 		m.Pv = 0
 	}
-
 	return BasicAttackDamage
 }
 
@@ -25,7 +24,6 @@ func FireBall(c *player.Character, m *Monster) int {
 	if m.Pv < 0 {
 		m.Pv = 0
 	}
-
 	return FireBallDamage
 }
 
@@ -37,11 +35,10 @@ func MonsterAttack(c *player.Character, m *Monster, t int) int {
 	}
 
 	c.Pv -= damage
-
-	if c.Pv < 0 {
+	
+    if c.Pv < 0 {
 		c.Pv = 0
 	}
-
 	return damage
 }
 
@@ -56,48 +53,40 @@ func Combat(c *player.Character) {
 		fmt.Printf("%s : %d/%d PV\n", c.Name, c.Pv, c.PvMax)
 		fmt.Printf("%s : %d/%d PV\n", monster.Name, monster.Pv, monster.PvMax)
 		fmt.Println()
-
 		fmt.Println("1. Attaquer")
 		fmt.Println("2. Inventaire")
 		fmt.Println("3. Abandonner")
 		fmt.Print("\nChoix : ")
-
 		choice := utils.ReadInt()
-
 		switch choice {
 
 case 1:
     utils.ClearScreen()
-
     fmt.Println("===== CHOISIR UNE ATTAQUE =====")
     fmt.Println()
-fmt.Println("1. Attaque de base (5 dégâts)")
-
+fmt.Println("1. coup de poing (5 dégâts)")
 if c.Inventory[utils.FireBall] > 0 {
-    fmt.Println("2. Fireball (20 dégâts)")
+    fmt.Println("2. Exploit de faille (20 dégâts)") 
 } else {
-    fmt.Println("2. Fireball [VERROUILLÉ]")
+    fmt.Println("2. Exploit de faille [VERROUILLÉ]") 
 }
 
 fmt.Println("3. Retour")
     fmt.Print("\nChoix : ")
-
     attackChoice := utils.ReadInt()
-
     var damage int
-
     switch attackChoice {
     case 1:
         damage = PlayerAttack(c, &monster)
         fmt.Printf(
-            "\nVous infligez %d dégâts avec votre attaque de base.\n",
+            "\nVous infligez %d dégâts avec votre coup de poing.\n",
             damage,
         )
 
 
 case 2:
     if c.Inventory[utils.FireBall] == 0 {
-        fmt.Println("ACHETE LA FIREBALL POUR ALLUMER LA GUEULE DE CE MISEREUX GOBLIN LA TU SAIS PAS LE FAIRE TROU D'UC !")
+        fmt.Println("Achète l’Exploit de faille à Ymatch pour débloquer cette attaque !")
         utils.Pause()
         continue
     }
@@ -105,7 +94,7 @@ case 2:
     damage = FireBall(c, &monster)
 
     fmt.Printf(
-        "\nVous infligez %d dégâts avec Fireball !\n",
+        "\nVous infligez %d dégâts avec l’Exploit de faille !\n",
         damage,
     )
 
@@ -119,7 +108,7 @@ case 2:
     }
 
     if IsDead(monster.Pv) {
-        fmt.Println("Victoire ! Le gobelin est vaincu. WHOUHOUUUUUUUUUUUUUU !")
+        fmt.Println("Victoire ! le Flag est capturé !")
         utils.Pause()
         return
     }
@@ -141,13 +130,10 @@ case 2:
 
     turn++
     utils.Pause()
-
 		case 2:
 			player.Inventaire(c, true)
-
 		case 3:
 			return
-
 		default:
 			fmt.Println("Choix invalide.")
 			utils.Pause()

@@ -2,12 +2,10 @@ package player
 
 import (
 	"fmt"
+	"projet-red/utils"
 	"strings"
 	"unicode"
-	"projet-red/utils"
 )
-
-
 
 type Character struct {
 	Name      string
@@ -21,8 +19,8 @@ type Character struct {
 }
 
 func (c *Character) InitCharacter(name string, classe string) {
-	c.Name = name
-	c.Classe = classe
+	c.Name = utils.Bold + name + utils.Reset
+	c.Classe = utils.Bold + utils.Cyan + classe + utils.Reset
 	c.Money = 100
 	c.Niveau = 1
 	c.Sorts = []string{"Coup de Poing"}
@@ -56,7 +54,6 @@ func isLettersOnly(value string) bool {
 			return false
 		}
 	}
-
 	return true
 }
 
@@ -76,7 +73,9 @@ func CharacterCreation() Character {
 	var name string
 
 	for {
-		fmt.Print("Entrez le nom de votre personnage : ")
+		fmt.Println(utils.Magenta + utils.Bold + "╔══════════ IDENTIFICATION ══════════╗" + utils.Reset)
+		fmt.Println("Bienvenue dans l’aventure.")
+		fmt.Print(utils.Cyan + "Entrez le nom de votre personnage : " + utils.Reset)
 		name = utils.ReadLine()
 
 		if isLettersOnly(name) {
@@ -87,15 +86,16 @@ func CharacterCreation() Character {
 	}
 
 	name = formatName(name)
+	Lore(name)
 
 	var classe string
 
 	for {
-		fmt.Println("\nChoisissez votre classe :")
-		fmt.Println("1. AI & Data")
-		fmt.Println("2. Info")
-		fmt.Println("3. Cyber")
-		fmt.Print("Choix : ")
+		fmt.Println("\n" + utils.Magenta + utils.Bold + "★ CHOIX DE LA CLASSE ★" + utils.Reset)
+		fmt.Println(utils.Green + "1. AI & Data" + utils.Reset)
+		fmt.Println(utils.Cyan + "2. Info" + utils.Reset)
+		fmt.Println(utils.Red + "3. Cyber" + utils.Reset)
+		fmt.Print(utils.Yellow + "Choix : " + utils.Reset)
 
 		choice := utils.ReadInt()
 
@@ -110,13 +110,8 @@ func CharacterCreation() Character {
 			fmt.Println("Choix invalide.")
 			continue
 		}
-
 		break
 	}
-
 	character.InitCharacter(name, classe)
 	return character
 }
-
-
-

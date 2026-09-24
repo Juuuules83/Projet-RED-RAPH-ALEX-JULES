@@ -7,6 +7,7 @@ import (
 	"os/exec" // Permet d'exécuter des commadandes CMD
 	"strconv" // Convertir string en int
 	"strings" // écrire texte
+	"time" // pour le typeWriter
 )
 
 var reader = bufio.NewReader(os.Stdin)
@@ -61,22 +62,22 @@ func PrintTitle() {
 	fmt.Println("██║  ██║██║   ██║██║███╗██║██║╚██╗██║██╔══╝  ██╔══██║██║     ██║     ")
 	fmt.Println("██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║██║     ██║  ██║███████╗███████╗")
 	fmt.Println("╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝")
-	fmt.Println(Reset)
+	fmt.Println(Reset + Yellow + Bold + "---------------------------------------------------------------------" + Reset + Cyan + Bold)
 	fmt.Println("                        - OF GOPHER - ")
-	fmt.Println()
+	fmt.Println(Reset)
 }                                                    
 
    var TotalItems int
    var Choose int
 
    const (
-	PotionVie    = "potion de vie"
-	PotionPoison = "potion de poison"
-	FireBall    = "boule de feu"
-	WolfFurr    = "fourrure de loup"
-	TrollSkin   = "peau de troll"
-	BoarLeather = "cuir de sanglier"
-	RavenFeather = "plume de corbeau"
+	PotionVie    = "Café"
+	PotionPoison = "Soupe" 
+	FireBall    = "Exploit de faille"
+	WolfFurr    = "Clé SSH" 
+	TrollSkin   = "Carte graphique" 
+	BoarLeather = "Fragment de code"
+	RavenFeather = "Ticket Ytrack"
 	StockageMax  = 10
 )
 
@@ -84,3 +85,18 @@ func PrintTitle() {
  var CountFB int // mise hors de la fonction sinon ça reprend toujours à 0 lorsque la boucle est recommencé
 
 // les Countfree et CountFB sont raccordé au marchand
+
+
+
+
+// typeWriter affiche une chaîne de caractères par caractère,
+// avec un délai delay entre chaque caractère. 
+func TypeWriter(str string, delay time.Duration) {
+    for _, r := range str {
+        fmt.Printf("%c", r)
+        time.Sleep(delay)
+    }
+    fmt.Println()
+}
+
+

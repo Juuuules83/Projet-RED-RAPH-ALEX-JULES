@@ -13,9 +13,9 @@ func MenuPrincipal(c *player.Character) {
 		utils.ClearScreen()
 		utils.PrintTitle()
 
-		fmt.Println("1. Informations du personnage")
+		fmt.Println("1. Informations")
 		fmt.Println("2. Inventaire")
-		fmt.Println("3. Marchand")
+		fmt.Println("3. Ymatch")
 		fmt.Println("4. Combat")
 		fmt.Println("5. Quitter")
 		fmt.Print("\nChoix : ")
@@ -32,7 +32,7 @@ func MenuPrincipal(c *player.Character) {
 		case 4:
 			combat.Combat(c)
 		case 5:
-			fmt.Println("Au revoir !")
+			fmt.Println("Ciao !")
 			return
 		default:
 			fmt.Println("Choix invalide.")

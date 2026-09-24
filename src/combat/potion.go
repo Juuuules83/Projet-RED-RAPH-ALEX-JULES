@@ -7,12 +7,10 @@ import (
     "time"
 )
 
-// Utilise potion de vie 
 func UtiliserPotionVie(c *player.Character) string {
     return c.UtiliserPotionVie()
 }
 
-// Utilise potion poison
 func PoisonPot(m *Monster) {
     for i := 0; i < 3; i++ {
         m.Pv -= 10
