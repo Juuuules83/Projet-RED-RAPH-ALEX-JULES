@@ -19,9 +19,7 @@ func AcheterPotionVie(c *player.Character) string {
 
     c.Money -= PrixPotionVie
 
-    return fmt.Sprintf(
-        "Potion achetée !",
-    )
+    return "Potion achetée !"
 }
 
 func Marchand(c *player.Character) {
