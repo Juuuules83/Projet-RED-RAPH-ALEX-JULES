@@ -15,14 +15,14 @@ func Marchand(c *player.Character) {
         fmt.Printf("Inventaire : %d/%d\n\n",
             c.TotalItems(), utils.StockageMax)
 
-        fmt.Println("1. Café du dev : 10 €") 
-        fmt.Println("2. Soupe de doute : 25 €") 
-        fmt.Println("3. Exploit de faille : 75 €") 
-        fmt.Println("4. Clé SSH : 4 €") 
-        fmt.Println("5. Carte graphique : 7 €") 
-        fmt.Println("6. Fragment de code : 3 €") 
-        fmt.Println("7. Ticket Ytrack : 1 €")
-        fmt.Println("0. Retour")
+        fmt.Println(utils.Bold + "1. Café du dev : 10 €" + utils.Reset)
+        fmt.Println(utils.Bold + "2. Soupe de doute : 25 €" + utils.Reset)
+        fmt.Println(utils.Bold + "3. Exploit de faille : 75 €" + utils.Reset)
+        fmt.Println(utils.Bold + "4. Clé SSH : 4 €" + utils.Reset)
+        fmt.Println(utils.Bold + "5. Carte graphique : 7 €" + utils.Reset)
+        fmt.Println(utils.Bold + "6. Fragment de code : 3 €" + utils.Reset)
+        fmt.Println(utils.Bold + "7. Ticket Ytrack : 1 €" + utils.Reset)
+        fmt.Println(utils.Bold + utils.Red + "0. Retour" + utils.Reset)
 
         fmt.Print("\nVotre choix : ")
         choice := utils.ReadInt()
