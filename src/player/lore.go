@@ -4,36 +4,12 @@ import (
 	"fmt"
 	"projet-red/utils"
 	"time"
-	"unicode/utf8"
 )
 
+
 func dialogueLore(message string) {
-	const vitesse = 28 * time.Millisecond
-	const attente = 1100 * time.Millisecond
-
-	for i := 0; i < len(message); {
-		// LORE : afficher les codes couleur ANSI instantanément, sans les ralentir.
-		if message[i] == 27 && i+1 < len(message) && message[i+1] == '[' {
-			j := i + 2
-			for j < len(message) && message[j] != 'm' {
-				j++
-			}
-			if j < len(message) {
-				j++
-			}
-			fmt.Print(message[i:j])
-			i = j
-			continue
-		}
-		
-		_, taille := utf8.DecodeRuneInString(message[i:])
-		fmt.Print(message[i : i+taille])
-		i += taille
-		time.Sleep(vitesse)
-	}
-
-	fmt.Println()
-	time.Sleep(attente) // les dialogue n'ont besoin de rien pour avancer
+    utils.TypeWriter(message, 28*time.Millisecond)
+    time.Sleep(1100 * time.Millisecond)
 }
 
 func Lore(name string) {
