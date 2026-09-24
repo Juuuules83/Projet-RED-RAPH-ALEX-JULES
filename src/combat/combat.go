@@ -71,9 +71,15 @@ case 1:
 
     fmt.Println("===== CHOISIR UNE ATTAQUE =====")
     fmt.Println()
-    fmt.Println("1. Attaque de base (5 dégâts)")
+fmt.Println("1. Attaque de base (5 dégâts)")
+
+if c.Inventory[utils.FireBall] > 0 {
     fmt.Println("2. Fireball (20 dégâts)")
-    fmt.Println("3. Retour")
+} else {
+    fmt.Println("2. Fireball [VERROUILLÉ]")
+}
+
+fmt.Println("3. Retour")
     fmt.Print("\nChoix : ")
 
     attackChoice := utils.ReadInt()
@@ -88,12 +94,20 @@ case 1:
             damage,
         )
 
-    case 2:
-        damage = FireBall(c, &monster)
-        fmt.Printf(
-            "\nVous infligez %d dégâts avec Fireball !\n",
-            damage,
-        )
+
+case 2:
+    if c.Inventory[utils.FireBall] == 0 {
+        fmt.Println("ACHETE LA FIREBALL POUR ALLUMER LA GUEULE DE CE MISEREUX GOBLIN LA TU SAIS PAS LE FAIRE TROU D'UC !")
+        utils.Pause()
+        continue
+    }
+
+    damage = FireBall(c, &monster)
+
+    fmt.Printf(
+        "\nVous infligez %d dégâts avec Fireball !\n",
+        damage,
+    )
 
     case 3:
         continue
@@ -105,7 +119,7 @@ case 1:
     }
 
     if IsDead(monster.Pv) {
-        fmt.Println("Victoire ! Le gobelin est vaincu.")
+        fmt.Println("Victoire ! Le gobelin est vaincu. WHOUHOUUUUUUUUUUUUUU !")
         utils.Pause()
         return
     }
