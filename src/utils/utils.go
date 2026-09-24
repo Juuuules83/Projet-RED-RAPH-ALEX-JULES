@@ -55,16 +55,16 @@ func Pause() {
 
 func PrintTitle() {
 	fmt.Println(Cyan + Bold)
-	fmt.Println("██████╗  ██████╗ ██╗    ██╗███╗   ██╗")
-	fmt.Println("██╔══██╗██╔═══██╗██║    ██║████╗  ██║")
-	fmt.Println("██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║")
-	fmt.Println("██║  ██║██║   ██║██║███╗██║██║╚██╗██║")
-	fmt.Println("██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║")
-	fmt.Println("╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝")
+	fmt.Println("██████╗  ██████╗ ██╗    ██╗███╗   ██╗███████╗ █████╗ ██╗     ██╗     ")
+	fmt.Println("██╔══██╗██╔═══██╗██║    ██║████╗  ██║██╔════╝██╔══██╗██║     ██║     ")
+	fmt.Println("██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║█████╗  ███████║██║     ██║     ")
+	fmt.Println("██║  ██║██║   ██║██║███╗██║██║╚██╗██║██╔══╝  ██╔══██║██║     ██║     ")
+	fmt.Println("██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║██║     ██║  ██║███████╗███████╗")
+	fmt.Println("╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝")
 	fmt.Println(Reset)
-	fmt.Println("            - OF GOPHER -")
+	fmt.Println("                        - OF GOPHER - ")
 	fmt.Println()
-}
+}                                                    
 
    var TotalItems int
    var Choose int
@@ -72,6 +72,14 @@ func PrintTitle() {
    const (
 	PotionVie    = "potion de vie"
 	PotionPoison = "potion de poison"
+<<<<<<< HEAD
+=======
+	FireBall    = "boule de feu"
+	WolfFurr    = "fourrure de loup"
+	TrollSkin   = "peau de troll"
+	BoarLeather = "cuir de sanglier"
+	RavenFeather = "plume de corbeau"
+>>>>>>> 5c9562dfffecd850e13546a4747f99b6b72973e0
 	StockageMax  = 10
 )
 

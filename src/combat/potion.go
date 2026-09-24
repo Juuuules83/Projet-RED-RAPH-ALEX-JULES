@@ -1,24 +1,32 @@
-
-
 package combat
 
 import (
-	"projet-red/player"
 	"fmt"
+	"projet-red/player"
 	"time"
 )
 
+// Utilise potion de vie
 func UtiliserPotionVie(c *player.Character) string {
-	return c.UtiliserPotionVie()	
+	return c.UtiliserPotionVie()
 }
 
+// Utilise potion poison
 func PoisonPot(m *Monster) {
-    for i := 0; i < 3; i++ {
-        m.Pv -= 10
-        if m.Pv < 0 {
-            m.Pv = 0
-        }
-        fmt.Printf("%s : %d/%d PV\n", m.Name, m.Pv, m.PvMax)
-        time.Sleep(1 * time.Second)
-    }
+	for i := 0; i < 3; i++ {
+		m.Pv -= 10
+
+		if m.Pv < 0 {
+			m.Pv = 0
+		}
+
+		fmt.Printf(
+			"%s : %d/%d PV\n",
+			m.Name,
+			m.Pv,
+			m.PvMax,
+		)
+
+		time.Sleep(1 * time.Second)
+	}
 }

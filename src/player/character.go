@@ -119,6 +119,7 @@ func CharacterCreation() Character {
 }
 
 
+<<<<<<< HEAD
 func (c *Character) UtiliserPotionVie() string {
 	quantity := c.Inventory[utils.PotionVie]
 
@@ -136,4 +137,6 @@ func (c *Character) UtiliserPotionVie() string {
 
 	return fmt.Sprintf("Potion utilisée. PV : %d/%d", c.Pv, c.PvMax)
 }
+=======
+>>>>>>> 5c9562dfffecd850e13546a4747f99b6b72973e0
 

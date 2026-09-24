@@ -31,7 +31,12 @@ func Inventaire(c *Character, depuisCombat bool) {
 
 		fmt.Print("\nChoix : ")
 
+<<<<<<< HEAD
 		switch utils.Choose {
+=======
+	choice := utils.ReadInt()
+	switch choice {
+>>>>>>> 5c9562dfffecd850e13546a4747f99b6b72973e0
 		case 1:
 			fmt.Println(c.UtiliserPotionVie())
 			utils.Pause()
@@ -89,3 +94,29 @@ func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 
 	return true
 }
+<<<<<<< HEAD
+=======
+
+
+func (c *Character) UtiliserPotionVie() string {
+    quantity := c.Inventory[utils.PotionVie]
+
+    if quantity <= 0 {
+        return "T'as plus de potion mon reuf... tu vas crever"
+    }
+
+    c.Pv += 50
+
+    if c.Pv > c.PvMax {
+        c.Pv = c.PvMax
+    }
+
+    c.RemoveInventory(utils.PotionVie, 1)
+
+    return fmt.Sprintf(
+        "Potion utilisée. PV : %d/%d",
+        c.Pv,
+        c.PvMax,
+    )
+}
+>>>>>>> 5c9562dfffecd850e13546a4747f99b6b72973e0
