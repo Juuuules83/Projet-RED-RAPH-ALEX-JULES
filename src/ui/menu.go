@@ -2,10 +2,10 @@ package ui
 
 import (
 	"fmt"
-	"projet-red/player"
-	"projet-red/utils"
 	"projet-red/combat"
 	"projet-red/marchand"
+	"projet-red/player"
+	"projet-red/utils"
 )
 
 func MenuPrincipal(c *player.Character) {
@@ -13,12 +13,12 @@ func MenuPrincipal(c *player.Character) {
 		utils.ClearScreen()
 		utils.PrintTitle()
 
-		fmt.Println("1. Informations")
-		fmt.Println("2. Inventaire")
-		fmt.Println("3. Ymatch")
-		fmt.Println("4. Combat")
-		fmt.Println("5. Quitter")
-		fmt.Print("\nChoix : ")
+		fmt.Println(utils.Bold + "[ 1 ] - Informations" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 2 ] - Inventaire" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 3 ] - Ymatch" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 4 ] - Combat" + utils.Reset)
+		fmt.Println(utils.Red + utils.Bold + "[ 5 ] - Quitter" + utils.Reset)
+		fmt.Print(utils.Yellow + "\nChoix : " + utils.Reset)
 
 		choice := utils.ReadInt()
 
@@ -32,10 +32,10 @@ func MenuPrincipal(c *player.Character) {
 		case 4:
 			combat.Combat(c)
 		case 5:
-			fmt.Println("Ciao !")
+			fmt.Println(utils.Green + "Ciao !" + utils.Reset)
 			return
 		default:
-			fmt.Println("Choix invalide.")
+			fmt.Println(utils.Red + "Choix invalide." + utils.Reset)
 			utils.Pause()
 		}
 	}
@@ -43,11 +43,11 @@ func MenuPrincipal(c *player.Character) {
 
 func AfficherPersonnage(c *player.Character) {
 	utils.ClearScreen()
-	fmt.Println("===== PERSONNAGE =====")
-	fmt.Println("Nom :", c.Name)
-	fmt.Println("Classe :", c.Classe)
-	fmt.Printf("PV : %d/%d\n", c.Pv, c.PvMax)
-	fmt.Println("Niveau :", c.Niveau)
-	fmt.Println("Argent :", c.Money, "€")
+	fmt.Println(utils.Magenta + "===== PERSONNAGE =====" + utils.Reset)
+	fmt.Println(utils.Cyan+"Nom : "+utils.Reset, c.Name)
+	fmt.Println(utils.Cyan+"Classe : "+utils.Reset, c.Classe)
+	fmt.Printf(utils.Green+"PV : %d/%d\n"+utils.Reset, c.Pv, c.PvMax)
+	fmt.Println(utils.Cyan+"Niveau : "+utils.Reset, c.Niveau)
+	fmt.Println(utils.Yellow+"Argent : "+utils.Reset, c.Money, "€")
 	utils.Pause()
 }

@@ -74,7 +74,7 @@ func CharacterCreation() Character {
 
 	for {
 		fmt.Println(utils.Magenta + utils.Bold + "╔══════════ IDENTIFICATION ══════════╗" + utils.Reset)
-		fmt.Println("Bienvenue dans l’aventure.")
+		fmt.Println(utils.Bold + "Bienvenue dans l’aventure." + utils.Reset)
 		fmt.Print(utils.Cyan + "Entrez le nom de votre personnage : " + utils.Reset)
 		name = utils.ReadLine()
 
@@ -82,7 +82,7 @@ func CharacterCreation() Character {
 			break
 		}
 
-		fmt.Println("Le nom doit contenir uniquement des lettres.")
+		fmt.Println(utils.Red + "Le nom doit contenir uniquement des lettres." + utils.Reset)
 	}
 
 	name = formatName(name)
@@ -92,9 +92,9 @@ func CharacterCreation() Character {
 
 	for {
 		fmt.Println("\n" + utils.Magenta + utils.Bold + "★ CHOIX DE LA CLASSE ★" + utils.Reset)
-		fmt.Println(utils.Green + "1. AI & Data" + utils.Reset)
-		fmt.Println(utils.Cyan + "2. Info" + utils.Reset)
-		fmt.Println(utils.Red + "3. Cyber" + utils.Reset)
+		fmt.Println(utils.Green + "1. AI & Data" + utils.Reset + utils.Bold + " - 100Pv" + utils.Reset)
+		fmt.Println(utils.Cyan + "2. Info" + utils.Reset + utils.Bold + " - 80Pv" + utils.Reset)
+		fmt.Println(utils.Red + "3. Cyber" + utils.Reset + utils.Bold + " - 120Pv" + utils.Reset)
 		fmt.Print(utils.Yellow + "Choix : " + utils.Reset)
 
 		choice := utils.ReadInt()
@@ -107,7 +107,7 @@ func CharacterCreation() Character {
 		case 3:
 			classe = "Cyber"
 		default:
-			fmt.Println("Choix invalide.")
+			fmt.Println(utils.Red + "Choix invalide." + utils.Reset)
 			continue
 		}
 		break

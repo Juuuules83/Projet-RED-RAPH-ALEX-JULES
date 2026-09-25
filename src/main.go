@@ -13,8 +13,8 @@ func main() {
 	for {
 		utils.ClearScreen()
 		utils.PrintTitle()
-		fmt.Println(utils.Green + "1. Commencer" + utils.Reset)
-		fmt.Println(utils.Red + "2. Quitter" + utils.Reset)
+		fmt.Println(utils.Green + utils.Bold + "[ 1 ] - Commencer" + utils.Reset)
+		fmt.Println(utils.Red + utils.Bold + "[ 2 ] - Quitter" + utils.Reset)
 		fmt.Print(utils.Yellow + "\nChoix : " + utils.Reset)
 
 		switch utils.ReadInt() {
@@ -25,10 +25,10 @@ func main() {
 			return
 		case 2:
 			utils.ClearScreen()
-			fmt.Println("Au revoir !")
+			fmt.Println(utils.Green + "Au revoir !" + utils.Reset)
 			return
 		default:
-			fmt.Println("Choix invalide.")
+			fmt.Println(utils.Red + "Choix invalide." + utils.Reset)
 			utils.Pause()
 		}
 	}

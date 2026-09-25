@@ -8,35 +8,35 @@ import (
 func Inventaire(c *Character, depuisCombat bool) {
 	for {
 		utils.ClearScreen()
-		fmt.Println("===== INVENTAIRE =====")
-		fmt.Printf("Objets : %d/%d\n\n", c.TotalItems(), utils.StockageMax)
+		fmt.Println(utils.Bold + utils.Magenta + "===== INVENTAIRE =====" + utils.Reset)
+		fmt.Printf(utils.Cyan+"Objets : %d/%d\n\n"+utils.Reset, c.TotalItems(), utils.StockageMax)
 		if len(c.Inventory) == 0 {
-			fmt.Println("L'inventaire est vide.")
+			fmt.Println(utils.Yellow + "L'inventaire est vide." + utils.Reset)
 		} else {
-			fmt.Println("Objets possédés :")
+			fmt.Println(utils.Green + "Objets possédés :" + utils.Reset)
 			for item, quantity := range c.Inventory {
-				fmt.Printf("- %s : x%d\n", item, quantity)
+				fmt.Printf(utils.Cyan+"- "+utils.Reset+"%s"+utils.Yellow+" : x%d\n"+utils.Reset, item, quantity)
 			}
 		}
 
 		fmt.Println()
-		fmt.Println("1. Boire un Café") 
+		fmt.Println(utils.Green + "1. Boire un Café" + utils.Reset)
 		if depuisCombat {
-			fmt.Println("2. Retour au combat")
+			fmt.Println(utils.Red + "2. Retour au combat" + utils.Reset)
 		} else {
-			fmt.Println("2. Retour au menu")
+			fmt.Println(utils.Red + "2. Retour au menu" + utils.Reset)
 		}
-		fmt.Print("\nChoix : ")
+		fmt.Print(utils.Yellow + "\nChoix : " + utils.Reset)
 
-	choice := utils.ReadInt()
-	switch choice {
+		choice := utils.ReadInt()
+		switch choice {
 		case 1:
 			fmt.Println(c.UtiliserPotionVie())
 			utils.Pause()
 		case 2:
 			return
 		default:
-			fmt.Println("Choix invalide.")
+			fmt.Println(utils.Red + "Choix invalide." + utils.Reset)
 			utils.Pause()
 		}
 	}
@@ -56,7 +56,7 @@ func (c *Character) AddInventory(itemName string, itemQuantity int) bool {
 	}
 
 	if c.TotalItems()+itemQuantity > utils.StockageMax {
-		fmt.Println("MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?")
+		fmt.Println(utils.Red + "MAIS TU ES MALADE GROS TU AS PLUS D'ESPACE LA, TU VEUX TE CASSER LE DOS ?" + utils.Reset)
 		return false
 	}
 	c.Inventory[itemName] += itemQuantity
@@ -82,23 +82,22 @@ func (c *Character) RemoveInventory(itemName string, itemQuantity int) bool {
 	return true
 }
 
-
 func (c *Character) UtiliserPotionVie() string {
-    quantity := c.Inventory[utils.PotionVie]
+	quantity := c.Inventory[utils.PotionVie]
 
-    if quantity <= 0 {
-        return "T’as plus de Café du dev, mon reuf... tu vas manquer d’énergie !"
-    }
+	if quantity <= 0 {
+		return "T’as plus de Café du dev, mon reuf... tu vas manquer d’énergie !"
+	}
 
-    c.Pv += 50
-    if c.Pv > c.PvMax {
-        c.Pv = c.PvMax
-    }
+	c.Pv += 50
+	if c.Pv > c.PvMax {
+		c.Pv = c.PvMax
+	}
 
-    c.RemoveInventory(utils.PotionVie, 1)
-    return fmt.Sprintf(
-        "miam le café ! PV : %d/%d",
-        c.Pv,
-        c.PvMax,
-    )
+	c.RemoveInventory(utils.PotionVie, 1)
+	return fmt.Sprintf(
+		"miam le café ! PV : %d/%d",
+		c.Pv,
+		c.PvMax,
+	)
 }
