@@ -8,14 +8,15 @@ import (
 )
 
 type Character struct {
-	Name      string
-	Classe    string
-	PvMax     int
-	Pv        int
-	Niveau    int
-	Sorts     []string
-	Inventory map[string]int
-	Money     int
+	Name       string
+	Classe     string
+	PvMax      int
+	Pv         int
+	Niveau     int
+	Sorts      []string
+	Inventory  map[string]int
+	Money      int
+	CountDeath int
 }
 
 func (c *Character) InitCharacter(name string, classe string) {

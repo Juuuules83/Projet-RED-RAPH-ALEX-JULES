@@ -10,8 +10,8 @@ func Artisant(c *player.Character) {
 	for {
 		utils.ClearScreen()
 
-		fmt.Println(utils.Bold + utils.Magenta + "===== ARTISANT =====" + utils.Reset)
-		fmt.Printf(utils.Yellow+"Argent : %d €\n"+utils.Reset, c.Money)
+		fmt.Println(utils.Bold + utils.Magenta + "===== YMATCH =====" + utils.Reset)
+		fmt.Printf(utils.Yellow+"Crédits ECTS : %d crédits ECTS\n"+utils.Reset, c.Money)
 		fmt.Printf(utils.Cyan+"Inventaire : %d/%d\n\n"+utils.Reset, c.TotalItems(), utils.StockageMax)
 
 		fmt.Println("1. " + utils.Bold + "[MENTOR] " + utils.Reset + utils.Cyan + "Vito" + utils.Reset + "\n\tObjets nécessaires : x1 Ticket Ytrack, x1 Fragment de code")

@@ -15,7 +15,7 @@ func MenuPrincipal(c *player.Character) {
 
 		fmt.Println(utils.Bold + "[ 1 ] - Informations" + utils.Reset)
 		fmt.Println(utils.Bold + "[ 2 ] - Inventaire" + utils.Reset)
-		fmt.Println(utils.Bold + "[ 3 ] - Ymatch" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 3 ] - La Fika" + utils.Reset)
 		fmt.Println(utils.Bold + "[ 4 ] - Combat" + utils.Reset)
 		fmt.Println(utils.Red + utils.Bold + "[ 5 ] - Quitter" + utils.Reset)
 		fmt.Print(utils.Yellow + "\nChoix : " + utils.Reset)
@@ -48,6 +48,6 @@ func AfficherPersonnage(c *player.Character) {
 	fmt.Println(utils.Cyan+"Classe : "+utils.Reset, c.Classe)
 	fmt.Printf(utils.Green+"PV : %d/%d\n"+utils.Reset, c.Pv, c.PvMax)
 	fmt.Println(utils.Cyan+"Niveau : "+utils.Reset, c.Niveau)
-	fmt.Println(utils.Yellow+"Argent : "+utils.Reset, c.Money, "€")
+	fmt.Println(utils.Yellow+"Crédits ECTS : "+utils.Reset, c.Money, "crédits ECTS")
 	utils.Pause()
 }

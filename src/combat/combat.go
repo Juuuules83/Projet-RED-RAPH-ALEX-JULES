@@ -50,8 +50,8 @@ func Combat(c *player.Character) {
 		utils.ClearScreen()
 		fmt.Println(utils.Bold + utils.Red + "===== COMBAT =====" + utils.Reset)
 		fmt.Println()
-		fmt.Printf(utils.Green+"%s : %d/%d PV\n"+utils.Reset, c.Name, c.Pv, c.PvMax)
-		fmt.Printf(utils.Red+"%s : %d/%d PV\n"+utils.Reset, monster.Name, monster.Pv, monster.PvMax)
+		fmt.Printf(utils.Green+"%s"+utils.Reset+" : "+utils.Bold+"\033[37m"+"%d/%d PV"+utils.Reset+"\n", c.Name, c.Pv, c.PvMax)
+		fmt.Printf(utils.Red+"%s"+utils.Reset+" : "+utils.Bold+"\033[37m"+"%d/%d PV"+utils.Reset+"\n", monster.Name, monster.Pv, monster.PvMax)
 		fmt.Println()
 		fmt.Println(utils.Bold + utils.Green + "[ 1 ] - Attaquer" + utils.Reset)
 		fmt.Println(utils.Cyan + "[ 2 ] - Inventaire" + utils.Reset)
@@ -85,7 +85,7 @@ func Combat(c *player.Character) {
 
 			case 2:
 				if c.Inventory[utils.FireBall] == 0 {
-					fmt.Println(utils.Yellow + "Achète l’Exploit de faille à Ymatch pour débloquer cette attaque !" + utils.Reset)
+					fmt.Println(utils.Yellow + "Achète l’Exploit de faille à La Fika pour débloquer cette attaque !" + utils.Reset)
 					utils.Pause()
 					continue
 				}
@@ -121,10 +121,7 @@ func Combat(c *player.Character) {
 			)
 
 			if IsDead(c.Pv) {
-				c.Pv = 0
-				fmt.Println(utils.Red + " GAME OVER" + utils.Reset)
-				utils.Pause()
-				return
+				HandlePlayerDeath(c)
 			}
 
 			turn++
