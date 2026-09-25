@@ -9,9 +9,9 @@ type Monster struct {
 
 func InitGoblin() Monster {
 	return Monster{
-		Name:   "Capture the Flag",
-		PvMax:  40,
-		Pv:     40,
-		Attack: 5,
+		Name:   "Gopher",
+		PvMax:  125,
+		Pv:     125,
+		Attack: 15,
 	}
 }
