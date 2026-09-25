@@ -6,25 +6,32 @@ import (
 	"projet-red/utils"
 )
 
-const BasicAttackDamage = 5
-const FireBallDamage = 20
+
 
 func PlayerAttack(c *player.Character, m *Monster) int {
-	m.Pv -= BasicAttackDamage
+	damage := utils.BasicAttackDamage
+	if c.Mentors["Cyril"] { //Bonus dégats Cyril
+		damage *= 2
+	}
+	m.Pv -= damage
 
 	if m.Pv < 0 {
 		m.Pv = 0
 	}
-	return BasicAttackDamage
+	return damage
 }
 
 func FireBall(c *player.Character, m *Monster) int {
-	m.Pv -= FireBallDamage
+	damage := utils.FireBallDamage
+	if c.Mentors["Cyril"] { //Bonus dégats Cyril
+		damage *= 2
+	}
+	m.Pv -= damage
 
 	if m.Pv < 0 {
 		m.Pv = 0
 	}
-	return FireBallDamage
+	return damage
 }
 
 func MonsterAttack(c *player.Character, m *Monster, t int) int {

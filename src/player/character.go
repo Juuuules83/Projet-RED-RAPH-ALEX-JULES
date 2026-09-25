@@ -17,6 +17,7 @@ type Character struct {
 	Inventory  map[string]int
 	Money      int
 	CountDeath int
+	Mentors map[string]bool
 }
 
 func (c *Character) InitCharacter(name string, classe string) {
@@ -25,6 +26,7 @@ func (c *Character) InitCharacter(name string, classe string) {
 	c.Money = 100
 	c.Niveau = 1
 	c.Sorts = []string{"Coup de Poing"}
+	c.Mentors = make(map[string]bool)
 
 	switch classe {
 	case "AI & Data":

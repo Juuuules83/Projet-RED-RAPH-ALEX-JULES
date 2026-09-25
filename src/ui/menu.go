@@ -16,8 +16,9 @@ func MenuPrincipal(c *player.Character) {
 		fmt.Println(utils.Bold + "[ 1 ] - Informations" + utils.Reset)
 		fmt.Println(utils.Bold + "[ 2 ] - Inventaire" + utils.Reset)
 		fmt.Println(utils.Bold + "[ 3 ] - La Fika" + utils.Reset)
-		fmt.Println(utils.Bold + "[ 4 ] - Combat" + utils.Reset)
-		fmt.Println(utils.Red + utils.Bold + "[ 5 ] - Quitter" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 4 ] - Ymatch" + utils.Reset)
+		fmt.Println(utils.Bold + "[ 5 ] - Combat" + utils.Reset)
+		fmt.Println(utils.Red + utils.Bold + "[ 6 ] - Quitter" + utils.Reset)
 		fmt.Print(utils.Yellow + "\nChoix : " + utils.Reset)
 
 		choice := utils.ReadInt()
@@ -30,8 +31,10 @@ func MenuPrincipal(c *player.Character) {
 		case 3:
 			marchand.Marchand(c)
 		case 4:
-			combat.Combat(c)
+			marchand.Artisant(c)
 		case 5:
+			combat.Combat(c)
+		case 6:
 			fmt.Println(utils.Green + "Ciao !" + utils.Reset)
 			return
 		default:

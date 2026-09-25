@@ -19,6 +19,23 @@ func Inventaire(c *Character, depuisCombat bool) {
 			}
 		}
 
+       // Place des mentors recruté dans Ymatch dans l'inventaire
+        fmt.Println()
+        fmt.Println(utils.Bold + utils.Magenta + "===== MENTORS =====" + utils.Reset)
+        if len(c.Mentors) == 0 {
+            fmt.Println("Aucun mentor recruté.")
+        } else {
+            for _, nom := range []string{"Vito", "Cyril", "Lilian"} {
+                if c.Mentors[nom] {
+                    if nom == "Cyril" {
+                        fmt.Println(utils.Green + "- Cyril : dégâts x2" + utils.Reset)
+                    } else {
+                        fmt.Println(utils.Green + "- " + nom + " : +20 PV" + utils.Reset)
+                    }
+                }
+            }
+        }
+
 		fmt.Println()
 		fmt.Println(utils.Green + "1. Boire un Café" + utils.Reset)
 		if depuisCombat {

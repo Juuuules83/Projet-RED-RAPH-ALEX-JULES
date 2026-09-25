@@ -29,39 +29,36 @@ func Artisant(c *player.Character) {
 			return
 
 		case 1:
-			if c.Inventory["Mentor Vito"] > 0 {
+			if c.Mentors["Vito"] {
 				fmt.Println(utils.Yellow + "Vito est déjà recruté !" + utils.Reset)
 			} else if c.Inventory[utils.RavenFeather] < 1 || c.Inventory[utils.BoarLeather] < 1 {
 				fmt.Println(utils.Red + "Il te manque des objets pour recruter Vito." + utils.Reset)
 			} else {
 				c.RemoveInventory(utils.RavenFeather, 1)
 				c.RemoveInventory(utils.BoarLeather, 1)
-				c.AddInventory("Mentor Vito", 1)
-				fmt.Println(utils.Green + "Vito a rejoint ton équipe !" + utils.Reset)
+				c.RecruterMentor("Vito")
 			}
 
 		case 2:
-			if c.Inventory["Mentor Cyril"] > 0 {
+			if c.Mentors["Cyril"] {
 				fmt.Println(utils.Yellow + "Cyril est déjà recruté !" + utils.Reset)
 			} else if c.Inventory[utils.WolfFurr] < 2 || c.Inventory[utils.TrollSkin] < 1 {
 				fmt.Println(utils.Red + "Il te manque des objets pour recruter Cyril." + utils.Reset)
 			} else {
 				c.RemoveInventory(utils.WolfFurr, 2)
 				c.RemoveInventory(utils.TrollSkin, 1)
-				c.AddInventory("Mentor Cyril", 1)
-				fmt.Println(utils.Green + "Cyril a rejoint ton équipe !" + utils.Reset)
+				c.RecruterMentor("Cyril")
 			}
 
 		case 3:
-			if c.Inventory["Mentor Lilian"] > 0 {
+			if c.Mentors["Lilian"] {
 				fmt.Println(utils.Yellow + "Lilian est déjà recruté !" + utils.Reset)
 			} else if c.Inventory[utils.WolfFurr] < 1 || c.Inventory[utils.BoarLeather] < 1 {
 				fmt.Println(utils.Red + "Il te manque des objets pour recruter Lilian." + utils.Reset)
 			} else {
 				c.RemoveInventory(utils.WolfFurr, 1)
 				c.RemoveInventory(utils.BoarLeather, 1)
-				c.AddInventory("Mentor Lilian", 1)
-				fmt.Println(utils.Green + "Lilian a rejoint ton équipe !" + utils.Reset)
+				c.RecruterMentor("Lilian")
 			}
 
 		default:
